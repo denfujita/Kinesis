@@ -75,8 +75,6 @@ trans = trans.dot(transform.as_matrix().T)
 
 amass_data["0"] = {"pose_aa": pose_aa, "trans": trans, 'beta': np.zeros(10)}
 
-double = False
-
 mujoco_joint_names = ['Pelvis', 'L_Hip', 'L_Knee', 'L_Ankle', 'L_Toe', 'R_Hip', 'R_Knee', 'R_Ankle', 'R_Toe', 'Torso', 'Spine', 'Chest', 'Neck', 'Head', 'L_Thorax', 'L_Shoulder', 'L_Elbow', 'L_Wrist', 'L_Hand', 'R_Thorax', 'R_Shoulder', 'R_Elbow', 'R_Wrist', 'R_Hand']
 
 amass_full_motion_dict = {}
