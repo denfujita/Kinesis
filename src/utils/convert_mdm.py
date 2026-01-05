@@ -91,10 +91,8 @@ for key_name in tqdm(amass_data.keys()):
     file_name = f"data/amass/singles/{key_name}.npy"
     B = smpl_data_entry['pose_aa'].shape[0]
 
-    start, end = 0, 0
-
-    pose_aa = smpl_data_entry['pose_aa'].copy()[start:]
-    root_trans = smpl_data_entry['trans'].copy()[start:]
+    pose_aa = smpl_data_entry['pose_aa'].copy()
+    root_trans = smpl_data_entry['trans'].copy()
     B = pose_aa.shape[0]
 
     beta = smpl_data_entry['beta'].copy() if "beta" in smpl_data_entry else smpl_data_entry['betas'].copy()
