@@ -90,22 +90,7 @@ for key_name in tqdm(amass_data.keys()):
     if len(beta.shape) == 2:
         beta = beta[0]
 
-    gender = smpl_data_entry.get("gender", "neutral")
     fps = params.fps
-
-    if isinstance(gender, np.ndarray):
-        gender = gender.item()
-
-    if isinstance(gender, bytes):
-        gender = gender.decode("utf-8")
-    if gender == "neutral":
-        gender_number = [0]
-    elif gender == "male":
-        gender_number = [1]
-    elif gender == "female":
-        gender_number = [2]
-    else:
-        raise Exception("Gender Not Supported!!")
 
     smpl_2_mujoco = [joint_names.index(q) for q in mujoco_joint_names if q in joint_names]
     batch_size = pose_aa.shape[0]
