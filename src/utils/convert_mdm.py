@@ -123,7 +123,6 @@ for key_name in tqdm(amass_data.keys()):
     pose_aa = np.concatenate([pose_aa[:, :66], np.zeros((batch_size, 6))], axis=1)
     pose_aa_mj = pose_aa.reshape(-1, 24, 3)[..., smpl_2_mujoco, :].copy()
 
-    num = 1
     pose_quat = sRot.from_rotvec(pose_aa_mj.reshape(-1, 3)).as_quat().reshape(batch_size, 24, 4)
 
     gender_number, beta[:], gender = [0], 0, "neutral"
