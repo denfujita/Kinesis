@@ -43,17 +43,17 @@
     mv ./faster_save/samples_faster_save_000750000_seed10_YOUR_PROMPT_HERE/results.npy generated_motions/MOTION_NAME.npy
     ```
 
-4. **Choose a repetition sample and generate .pkl file**:
+5. **Choose a repetition sample and generate .pkl file**:
     ```bash
     python -m visualize.numpy_to_pkl --input_path generated_motions/MOTION_NAME.npy --model mdm --rep 0
     ```
 
-5. **Move to the Kinesis repository and generate the imitation-compatible .pkl file**:
+6. **Move to the Kinesis repository and generate the imitation-compatible .pkl file**:
     ```bash
     python utils/convert_data_mdm.py --input_path generated_motions/MOTION_NAME.pkl --output_dir data/t2m
     ```
 
-6. **Run the model**:
+7. **Run the model**:
     ```bash
     bash scripts/t2m.sh data/t2m/MOTION_NAME.pkl
     ```
