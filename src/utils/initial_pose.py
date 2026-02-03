@@ -15,8 +15,8 @@ import numpy as np
 
 @hydra.main(
     version_base=None,
-    config_path="../data/cfg",
-    config_name="config",
+    config_path="../../cfg",
+    config_name="config_legs.yaml",
 )
 def main(cfg):
     initial_pose_dict = {}
@@ -32,7 +32,7 @@ def main(cfg):
         )
         motion_length = env.motion_lib._motion_lengths[0]
         initial_pose_dict[env.motion_lib._curr_motion_ids[0]] = {}
-        print(f'Processing motion {env.motion_lib._curr_motion_ids[0]}: {motion_length} frames')
+        print(f'Processing motion {env.motion_lib._curr_motion_ids[0]}: {motion_length} seconds.')
         for start_time in np.arange(0, motion_length, 0.2):
             print(f'Start time: {start_time}')
             env.reset(options={'start_time': start_time})
@@ -48,7 +48,11 @@ def main(cfg):
             new_data[motion_key][new_key] = initial_pose_dict[motion_key][frame_key]
             print(f'Old key: {frame_key}, New key: {new_key}')
 
-    joblib.dump(new_data, f'data/initial_pose/initial_pose_{cfg.exp_name}.pkl')
+    if cfg.run.motion_file == "data/kit_train_motion_dict.pkl":
+        dataset_type = "train"
+    else:
+        dataset_type = "test"
+    joblib.dump(new_data, f'data/initial_pose/{cfg.datadir}/initial_pose_{dataset_type}.pkl')
 
 if __name__ == "__main__":
-    main()
+    main()  

@@ -17,6 +17,7 @@ import mujoco
 import time
 from typing import Optional
 
+terrain_rng = np.random.RandomState(0)
 
 class BaseEnv(gym.Env):
 
@@ -53,6 +54,7 @@ class BaseEnv(gym.Env):
             tuple: A tuple containing the observation and info after the reset.
         """
         super().reset(seed=seed, options=options)
+
         self.cur_t = 0
 
         observation = self.compute_observations()
@@ -120,14 +122,14 @@ class BaseEnv(gym.Env):
             if self.viewer is None and self.renderer is None:
                 self.create_viewer()
             
-            if self.render_mode == "human":
+            if self.render_mode == "human" and self.viewer is not None:
                 self.viewer.sync()
                 if self.follow:
                     self.viewer.cam.lookat = self.mj_data.qpos[:3]
                 if not self.fast_forward:
                     time.sleep(1. / 100)
             
-            if self.render_mode == "rgb_array":
+            if self.render_mode == "rgb_array" and self.renderer is not None:
                 self.renderer.update_scene(self.mj_data, camera=self.camera)
                 pixels = self.renderer.render()
                 return pixels
