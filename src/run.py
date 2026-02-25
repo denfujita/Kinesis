@@ -19,7 +19,6 @@ sys.path.append(os.getcwd())
 
 import torch
 import numpy as np
-import wandb
 
 from src.agents import agent_dict
 from omegaconf import DictConfig, OmegaConf
@@ -39,6 +38,7 @@ def main(cfg: DictConfig) -> None:
     cfg.output_dir = hydra.core.hydra_config.HydraConfig.get().runtime.output_dir
 
     if (not cfg.no_log) and (not cfg.run.test):
+        import wandb
         group = cfg.get("group", cfg.learning.agent_name)
         wandb.init(
             project=cfg.project,

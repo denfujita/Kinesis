@@ -1,5 +1,10 @@
+# Install setuptools first (provides pkg_resources needed by some packages)
+setuptools>=65.0.0
+
 chumpy==0.70
-clip @ git+https://github.com/openai/CLIP.git@a1d071733d7111c9c014f024669f959182114e33
+# CLIP: Optional - required for text-to-motion only. Fails on Python 3.12+.
+# Uncomment if needed: pip install git+https://github.com/openai/CLIP.git@a1d071733d7111c9c014f024669f959182114e33
+# clip @ git+https://github.com/openai/CLIP.git@a1d071733d7111c9c014f024669f959182114e33
 easydict==1.11
 gym==0.26.2
 gym-notices==0.0.8

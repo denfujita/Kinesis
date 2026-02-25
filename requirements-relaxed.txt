@@ -1,0 +1,25 @@
+# Relaxed requirements for Python 3.12+ (no strict version pins)
+# Use if: pip install -r requirements.txt fails
+# Then: pip install git+https://github.com/ZhengyiLuo/smplx.git@a5b8e4ac14f79f3f33fd2cf2a16e6f507146b813
+
+setuptools>=65.0
+chumpy
+easydict
+gym
+gymnasium
+h5py
+hydra-core
+joblib
+lxml
+matplotlib
+mujoco
+numpy
+numpy-stl
+omegaconf
+pandas
+PyOpenGL
+scipy
+termcolor
+tqdm
+wandb
+smplx @ git+https://github.com/ZhengyiLuo/smplx.git@a5b8e4ac14f79f3f33fd2cf2a16e6f507146b813

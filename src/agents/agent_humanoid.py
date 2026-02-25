@@ -11,7 +11,6 @@ from abc import ABC, abstractmethod
 import time
 import os
 import torch
-import wandb
 import numpy as np
 import psutil
 
@@ -338,6 +337,7 @@ class AgentHumanoid(AgentPPO, ABC):
         logger.info(log_str)
 
         if not self.cfg.no_log:
+            import wandb
             wandb_data = {
                 "avg_episode_reward": loggers.avg_episode_reward,
                 "eps_len": loggers.avg_episode_len,

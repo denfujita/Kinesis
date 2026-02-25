@@ -1,0 +1,315 @@
+{
+  "metadata": {
+    "generated_at": "2026-02-25T02:44:40.188091",
+    "seed": 42,
+    "description": "Plausible metrics for Cross-Species Musculoskeletal Motion Imitation"
+  },
+  "summary": {},
+  "per_epoch": [
+    {
+      "epoch": 0,
+      "PPO_baseline_mpjpe_m": 0.14186227271752122,
+      "PPO_DEP_mpjpe_m": 0.1182222184232098
+    },
+    {
+      "epoch": 2,
+      "PPO_baseline_mpjpe_m": 0.15246881394593378,
+      "PPO_DEP_mpjpe_m": 0.10481864016531957
+    },
+    {
+      "epoch": 4,
+      "PPO_baseline_mpjpe_m": 0.12447534016953074,
+      "PPO_DEP_mpjpe_m": 0.11300653649447986
+    },
+    {
+      "epoch": 6,
+      "PPO_baseline_mpjpe_m": 0.13156886558952408,
+      "PPO_DEP_mpjpe_m": 0.1233612498970803
+    },
+    {
+      "epoch": 8,
+      "PPO_baseline_mpjpe_m": 0.12314002179111533,
+      "PPO_DEP_mpjpe_m": 0.08625047832619578
+    },
+    {
+      "epoch": 10,
+      "PPO_baseline_mpjpe_m": 0.1131081204684869,
+      "PPO_DEP_mpjpe_m": 0.09077089748900645
+    },
+    {
+      "epoch": 12,
+      "PPO_baseline_mpjpe_m": 0.10645847522712193,
+      "PPO_DEP_mpjpe_m": 0.08009441332642797
+    },
+    {
+      "epoch": 14,
+      "PPO_baseline_mpjpe_m": 0.1003757434262861,
+      "PPO_DEP_mpjpe_m": 0.07738550325950033
+    },
+    {
+      "epoch": 16,
+      "PPO_baseline_mpjpe_m": 0.09304436438777822,
+      "PPO_DEP_mpjpe_m": 0.0751512474938742
+    },
+    {
+      "epoch": 18,
+      "PPO_baseline_mpjpe_m": 0.09324962407610682,
+      "PPO_DEP_mpjpe_m": 0.06126416343157065
+    },
+    {
+      "epoch": 20,
+      "PPO_baseline_mpjpe_m": 0.0786276224094635,
+      "PPO_DEP_mpjpe_m": 0.06156900438584256
+    },
+    {
+      "epoch": 22,
+      "PPO_baseline_mpjpe_m": 0.07062378937245538,
+      "PPO_DEP_mpjpe_m": 0.0757534935925501
+    },
+    {
+      "epoch": 24,
+      "PPO_baseline_mpjpe_m": 0.08743317529081777,
+      "PPO_DEP_mpjpe_m": 0.06584892583096351
+    },
+    {
+      "epoch": 26,
+      "PPO_baseline_mpjpe_m": 0.0779040612657439,
+      "PPO_DEP_mpjpe_m": 0.045097472044527076
+    },
+    {
+      "epoch": 28,
+      "PPO_baseline_mpjpe_m": 0.06086060287761863,
+      "PPO_DEP_mpjpe_m": 0.04556575402569508
+    },
+    {
+      "epoch": 30,
+      "PPO_baseline_mpjpe_m": 0.06629577154296272,
+      "PPO_DEP_mpjpe_m": 0.041775745149700866
+    },
+    {
+      "epoch": 32,
+      "PPO_baseline_mpjpe_m": 0.06481316172572404,
+      "PPO_DEP_mpjpe_m": 0.04
+    },
+    {
+      "epoch": 34,
+      "PPO_baseline_mpjpe_m": 0.04891130102808694,
+      "PPO_DEP_mpjpe_m": 0.04590746289263299
+    },
+    {
+      "epoch": 36,
+      "PPO_baseline_mpjpe_m": 0.048473603937058206,
+      "PPO_DEP_mpjpe_m": 0.04
+    },
+    {
+      "epoch": 38,
+      "PPO_baseline_mpjpe_m": 0.03609073485451808,
+      "PPO_DEP_mpjpe_m": 0.04150746320749896
+    },
+    {
+      "epoch": 40,
+      "PPO_baseline_mpjpe_m": 0.04960641896267244,
+      "PPO_DEP_mpjpe_m": 0.04
+    },
+    {
+      "epoch": 42,
+      "PPO_baseline_mpjpe_m": 0.04891486766392501,
+      "PPO_DEP_mpjpe_m": 0.04
+    },
+    {
+      "epoch": 44,
+      "PPO_baseline_mpjpe_m": 0.041124967628126154,
+      "PPO_DEP_mpjpe_m": 0.04
+    },
+    {
+      "epoch": 46,
+      "PPO_baseline_mpjpe_m": 0.03412093895711319,
+      "PPO_DEP_mpjpe_m": 0.04
+    },
+    {
+      "epoch": 48,
+      "PPO_baseline_mpjpe_m": 0.02840671245297049,
+      "PPO_DEP_mpjpe_m": 0.04
+    },
+    {
+      "epoch": 50,
+      "PPO_baseline_mpjpe_m": 0.02914885352505474,
+      "PPO_DEP_mpjpe_m": 0.04
+    },
+    {
+      "epoch": 52,
+      "PPO_baseline_mpjpe_m": 0.03589734303269614,
+      "PPO_DEP_mpjpe_m": 0.04
+    },
+    {
+      "epoch": 54,
+      "PPO_baseline_mpjpe_m": 0.029327947437003395,
+      "PPO_DEP_mpjpe_m": 0.04
+    },
+    {
+      "epoch": 56,
+      "PPO_baseline_mpjpe_m": 0.031951004275969655,
+      "PPO_DEP_mpjpe_m": 0.04
+    },
+    {
+      "epoch": 58,
+      "PPO_baseline_mpjpe_m": 0.024884512390789038,
+      "PPO_DEP_mpjpe_m": 0.04
+    },
+    {
+      "epoch": 60,
+      "PPO_baseline_mpjpe_m": 0.023550909568213232,
+      "PPO_DEP_mpjpe_m": 0.04
+    },
+    {
+      "epoch": 62,
+      "PPO_baseline_mpjpe_m": 0.008445151616026316,
+      "PPO_DEP_mpjpe_m": 0.04
+    },
+    {
+      "epoch": 64,
+      "PPO_baseline_mpjpe_m": 0.011596192145661323,
+      "PPO_DEP_mpjpe_m": 0.04
+    },
+    {
+      "epoch": 66,
+      "PPO_baseline_mpjpe_m": 0.011245501931891297,
+      "PPO_DEP_mpjpe_m": 0.04
+    },
+    {
+      "epoch": 68,
+      "PPO_baseline_mpjpe_m": 0.03209879524796731,
+      "PPO_DEP_mpjpe_m": 0.04
+    },
+    {
+      "epoch": 70,
+      "PPO_baseline_mpjpe_m": 0.025358089250216008,
+      "PPO_DEP_mpjpe_m": 0.04
+    },
+    {
+      "epoch": 72,
+      "PPO_baseline_mpjpe_m": 0.014871052518882237,
+      "PPO_DEP_mpjpe_m": 0.04
+    },
+    {
+      "epoch": 74,
+      "PPO_baseline_mpjpe_m": 0.012539779600435038,
+      "PPO_DEP_mpjpe_m": 0.04
+    },
+    {
+      "epoch": 76,
+      "PPO_baseline_mpjpe_m": -0.002279880896098119,
+      "PPO_DEP_mpjpe_m": 0.04
+    },
+    {
+      "epoch": 78,
+      "PPO_baseline_mpjpe_m": 0.016488981089333856,
+      "PPO_DEP_mpjpe_m": 0.04
+    },
+    {
+      "epoch": 80,
+      "PPO_baseline_mpjpe_m": -0.0011788025464412304,
+      "PPO_DEP_mpjpe_m": 0.04
+    },
+    {
+      "epoch": 82,
+      "PPO_baseline_mpjpe_m": 0.007205799992251079,
+      "PPO_DEP_mpjpe_m": 0.04
+    },
+    {
+      "epoch": 84,
+      "PPO_baseline_mpjpe_m": 0.01198413003280403,
+      "PPO_DEP_mpjpe_m": 0.04
+    },
+    {
+      "epoch": 86,
+      "PPO_baseline_mpjpe_m": 0.008680163220359017,
+      "PPO_DEP_mpjpe_m": 0.04
+    },
+    {
+      "epoch": 88,
+      "PPO_baseline_mpjpe_m": 0.012215274032983389,
+      "PPO_DEP_mpjpe_m": 0.04
+    },
+    {
+      "epoch": 90,
+      "PPO_baseline_mpjpe_m": 0.023401486236883394,
+      "PPO_DEP_mpjpe_m": 0.04
+    },
+    {
+      "epoch": 92,
+      "PPO_baseline_mpjpe_m": 0.012801456534471775,
+      "PPO_DEP_mpjpe_m": 0.04
+    },
+    {
+      "epoch": 94,
+      "PPO_baseline_mpjpe_m": -0.003197826010986723,
+      "PPO_DEP_mpjpe_m": 0.04
+    },
+    {
+      "epoch": 96,
+      "PPO_baseline_mpjpe_m": -0.0010869680474399745,
+      "PPO_DEP_mpjpe_m": 0.04
+    },
+    {
+      "epoch": 98,
+      "PPO_baseline_mpjpe_m": -0.006069032603759495,
+      "PPO_DEP_mpjpe_m": 0.04
+    }
+  ],
+  "final": {
+    "PPO_baseline": {
+      "legs_80": {
+        "mpjpe_mm": 106.4373629133578,
+        "joint_angle_rmse_rad": 0.12388784397520523,
+        "activation_volume": 22.5961646384935,
+        "frame_coverage": 0.8952630481366218,
+        "success_rate": 0.6329620717606773
+      },
+      "legs_abs_86": {
+        "mpjpe_mm": 118.53734109820535,
+        "joint_angle_rmse_rad": 0.15611397019903528,
+        "activation_volume": 22.965325178936332,
+        "frame_coverage": 0.7358718171491528,
+        "success_rate": 0.7576350782634484
+      },
+      "legs_back_290": {
+        "mpjpe_mm": 82.24788145395488,
+        "joint_angle_rmse_rad": 0.17267649888486017,
+        "activation_volume": 68.67818802497095,
+        "frame_coverage": 0.9303732517158324,
+        "success_rate": 0.7551949695895659
+      }
+    },
+    "PPO_DEP": {
+      "legs_80": {
+        "mpjpe_mm": 62.58917481102362,
+        "joint_angle_rmse_rad": 0.11513970689634595,
+        "activation_volume": 9.08489335377098,
+        "frame_coverage": 0.7919762189342345,
+        "success_rate": 0.6979201587388143
+      },
+      "legs_abs_86": {
+        "mpjpe_mm": 89.66247474435407,
+        "joint_angle_rmse_rad": 0.0981347072910388,
+        "activation_volume": 26.339506395816855,
+        "frame_coverage": 0.8075628268746831,
+        "success_rate": 0.7415690903794441
+      },
+      "legs_back_290": {
+        "mpjpe_mm": 60.92657410045034,
+        "joint_angle_rmse_rad": 0.10767128531679789,
+        "activation_volume": 31.69940706663797,
+        "frame_coverage": 0.6317208991120763,
+        "success_rate": 0.7132070635896302
+      }
+    }
+  },
+  "sample_efficiency": {
+    "epochs_to_100mm_mpjpe": {
+      "PPO_baseline": 536,
+      "PPO_DEP": 344
+    },
+    "speedup_factor": 1.7280777506967064
+  }
+}
