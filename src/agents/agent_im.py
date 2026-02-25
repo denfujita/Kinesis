@@ -189,7 +189,8 @@ class AgentIM(AgentHumanoid):
                 state = next_state
 
         # If the loop exits without termination, consider it a failure
-        return False, self.env.mpjpe, self.env.frame_coverage
+        mpjpe = getattr(self.env, "mpjpe_value", np.mean(self.env.mpjpe) if self.env.mpjpe else np.nan)
+        return False, mpjpe, getattr(self.env, "frame_coverage", 0.0)
             
             
     def run_policy(self, epoch: int = 0, dump: bool = False) -> dict:

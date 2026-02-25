@@ -249,11 +249,14 @@ class Agent:
                     obs_dict, info = self.env.reset()
                     state = self.preprocess_obs(obs_dict)
                     expert_idx = torch.tensor(0, dtype=torch.int64)  # Initialize expert index
-                    
+
+                    dep_exploration = getattr(self, "dep_exploration", None)
+                    if dep_exploration is not None:
+                        dep_exploration.reset()
+
                     rl_logger.start_episode(self.env)
                     episode_count += 1
 
-                    
                     for t in range(10000):
                         step_count += 1
                         
@@ -264,27 +267,39 @@ class Agent:
                         mean_action = self.mean_action or self.env.np_random.binomial(
                             1, 1 - self.noise_rate
                         )
-                        
-                        # Policy action selection
-                        state_tensor = torch.from_numpy(state).to(self.dtype)
-                        if isinstance(self.policy_net, PolicyMOE):
-                            actions, expert_idx = self.policy_net.select_action(
-                                torch.from_numpy(state).to(self.dtype), True
-                            )
-                            actions = actions[0].numpy()
-                        elif isinstance(self.policy_net, PolicyMOEWithPrev):
-                            expert_idx_oh = torch.nn.functional.one_hot(
-                                expert_idx, num_classes=self.cfg.num_experts
-                            ).float()
-                            actions, expert_idx = self.policy_net.select_action(
-                                torch.from_numpy(state).to(self.dtype),
-                                expert_idx_oh,
-                                True,
-                            )
-                            actions = actions[0].numpy()
-                        else:
-                            actions = self.policy_net.select_action(state_tensor, mean_action)[0].numpy()
-                        
+
+                        dep_exploration = getattr(self, "dep_exploration", None)
+                        use_dep = False
+                        if dep_exploration is not None and not self.mean_action:
+                            proprio = getattr(self.env, "proprioception", None)
+                            if proprio is not None and "muscle_len" in proprio and "muscle_force" in proprio:
+                                muscle_states = dep_exploration.get_muscle_states(
+                                    proprio["muscle_len"], proprio["muscle_force"]
+                                )
+                                if dep_exploration.should_use_dep(greedy=False):
+                                    actions = dep_exploration.get_dep_action(muscle_states)
+                                    use_dep = True
+
+                        if not use_dep:
+                            state_tensor = torch.from_numpy(state).to(self.dtype)
+                            if isinstance(self.policy_net, PolicyMOE):
+                                actions, expert_idx = self.policy_net.select_action(
+                                    torch.from_numpy(state).to(self.dtype), mean_action
+                                )
+                                actions = actions[0].numpy()
+                            elif isinstance(self.policy_net, PolicyMOEWithPrev):
+                                expert_idx_oh = torch.nn.functional.one_hot(
+                                    expert_idx, num_classes=self.cfg.num_experts
+                                ).float()
+                                actions, expert_idx = self.policy_net.select_action(
+                                    torch.from_numpy(state).to(self.dtype),
+                                    expert_idx_oh,
+                                    mean_action,
+                                )
+                                actions = actions[0].numpy()
+                            else:
+                                actions = self.policy_net.select_action(state_tensor, mean_action)[0].numpy()
+
                         # Environment step
                         processed_actions = self.preprocess_actions(actions)
                         next_obs, reward, terminated, truncated, info = self.env.step(processed_actions)
@@ -295,7 +310,7 @@ class Agent:
                         rl_logger.step(self.env, reward, info)
 
                         mask = 0 if episode_done else 1
-                        exp = 1 - mean_action
+                        exp = 1.0 if use_dep else (1 - mean_action)
                         
                         if hasattr(self.policy_net, "experts"):
                             self.push_memory(
