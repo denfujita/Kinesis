@@ -377,14 +377,14 @@ class Agent:
     def sample(self, min_batch_size: int):
         """Sample with comprehensive debugging"""
 
-        os.system("rm -rf /dev/shm/torch_*")
-
         import psutil
-        shm = psutil.disk_usage('/dev/shm')
-        self.main_logger.info(f"Shared memory usage before sampling: {shm.percent}%")
-        if shm.percent > 80:
-            os.system("rm -rf /dev/shm/*")
-            self.main_logger.warning("Shared memory usage was high, cleared /dev/shm")
+        if os.path.exists("/dev/shm"):
+            os.system("rm -rf /dev/shm/torch_*")
+            shm = psutil.disk_usage('/dev/shm')
+            self.main_logger.info(f"Shared memory usage before sampling: {shm.percent}%")
+            if shm.percent > 80:
+                os.system("rm -rf /dev/shm/*")
+                self.main_logger.warning("Shared memory usage was high, cleared /dev/shm")
 
         self.main_logger.info(f"Starting sampling with {self.num_threads} threads")
         monitor_resources(self.main_logger, 'main', 'SAMPLE_START')

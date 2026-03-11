@@ -1,18 +1,14 @@
 #!/usr/bin/env python3
 """
-Generate publication-quality figures for the final project report.
+Generate figures for the final report from training log CSVs.
 
-Produces:
-  1. Learning curves: MPJPE vs epoch for PPO baseline vs PPO+DEP (3 morphologies)
-  2. Bar chart: final metrics comparison across methods and morphologies
-  3. Sample efficiency: epochs to reach MPJPE < 100mm
-  4. Ablation: DEP intervention probability sensitivity
-  5. DEP self-organization: C matrix norm over time
-  6. Architecture diagram data (for LaTeX tikz)
+Reads per-epoch training data from:
+  data/trained_models/<morphology>/<exp_name>_training_log.csv
 
-All figures saved as PDF in reports/figures/.
+Produces PDF figures in reports/figures/.
 """
 
+import csv
 import json
 import os
 import sys
@@ -23,145 +19,174 @@ import numpy as np
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
-import matplotlib.gridspec as gridspec
 
-SEED = 42
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+
 OUT_DIR = Path("reports/figures")
+LOG_BASE = Path("data/trained_models")
 
 
 def set_style():
     plt.rcParams.update({
-        "font.family": "serif",
-        "font.size": 10,
-        "axes.titlesize": 11,
-        "axes.labelsize": 10,
-        "xtick.labelsize": 9,
-        "ytick.labelsize": 9,
-        "legend.fontsize": 9,
-        "figure.dpi": 150,
-        "savefig.dpi": 300,
-        "savefig.bbox": "tight",
-        "axes.grid": True,
-        "grid.alpha": 0.3,
+        "font.family": "serif", "font.size": 10,
+        "axes.titlesize": 11, "axes.labelsize": 10,
+        "xtick.labelsize": 9, "ytick.labelsize": 9,
+        "legend.fontsize": 9, "figure.dpi": 150,
+        "savefig.dpi": 300, "savefig.bbox": "tight",
+        "axes.grid": True, "grid.alpha": 0.3,
     })
 
 
-def smooth(y, window=5):
+def read_training_log(csv_path):
+    """Read a training log CSV into dict of lists."""
+    data = {}
+    with open(csv_path, "r") as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            for key, val in row.items():
+                if key not in data:
+                    data[key] = []
+                try:
+                    data[key].append(float(val))
+                except (ValueError, TypeError):
+                    data[key].append(None)
+    return data
+
+
+def smooth(y, window=7):
+    """Moving average smoothing."""
+    y = np.array(y, dtype=float)
     kernel = np.ones(window) / window
     return np.convolve(y, kernel, mode="same")
 
 
-def generate_learning_curves(rng, n_epochs=500):
-    """Fig 1: MPJPE learning curves for PPO vs PPO+DEP across 3 morphologies."""
+def plot_learning_curves():
+    """Fig 1: MPJPE learning curves."""
     morphologies = [
-        ("MyoLeg (80 muscles)", 80),
-        ("MyoLeg+Abs (86 muscles)", 86),
-        ("MyoLeg+Back (290 muscles)", 290),
+        ("MyoLeg (80 muscles)", "legs", "ppo_baseline_legs", "ppo_dep_legs"),
+        ("MyoLeg+Abs (86 muscles)", "legs_abs", "ppo_baseline_legs_abs", "ppo_dep_legs_abs"),
+        ("MyoLeg+Back (290 muscles)", "legs_back", "ppo_baseline_legs_back", "ppo_dep_legs_back"),
     ]
-    epochs = np.arange(n_epochs)
 
     fig, axes = plt.subplots(1, 3, figsize=(12, 3.5), sharey=True)
 
-    all_data = {}
-    for ax, (name, n_muscles) in zip(axes, morphologies):
-        difficulty = 1.0 + (n_muscles - 80) / 300.0
-        baseline = 150 * np.exp(-epochs / (180 * difficulty)) + 55 * difficulty
-        baseline += rng.normal(0, 4, n_epochs)
-        baseline = smooth(np.clip(baseline, 40, 200), window=7)
+    for ax, (title, morph_dir, baseline_name, dep_name) in zip(axes, morphologies):
+        bl_path = LOG_BASE / morph_dir / baseline_name / f"{baseline_name}_training_log.csv"
+        dep_path = LOG_BASE / morph_dir / dep_name / f"{dep_name}_training_log.csv"
 
-        dep = 140 * np.exp(-epochs / (120 * difficulty)) + 38 * difficulty
-        dep += rng.normal(0, 3, n_epochs)
-        dep = smooth(np.clip(dep, 30, 180), window=7)
+        if not bl_path.exists() or not dep_path.exists():
+            ax.set_title(f"{title}\n(no data)")
+            continue
 
-        ax.plot(epochs, baseline, color="#d62728", alpha=0.85, linewidth=1.5, label="PPO baseline")
-        ax.plot(epochs, dep, color="#1f77b4", alpha=0.85, linewidth=1.5, label="PPO + DEP")
+        bl = read_training_log(bl_path)
+        dep = read_training_log(dep_path)
+
+        bl_mpjpe = smooth(np.array(bl["mpjpe"]) * 1000)
+        dep_mpjpe = smooth(np.array(dep["mpjpe"]) * 1000)
+        epochs = np.array(bl["epoch"])
+
+        ax.plot(epochs, bl_mpjpe, color="#d62728", alpha=0.85, linewidth=1.5, label="PPO baseline")
+        ax.plot(epochs, dep_mpjpe, color="#1f77b4", alpha=0.85, linewidth=1.5, label="PPO + DEP")
         ax.axhline(y=100, color="gray", linestyle="--", alpha=0.5, linewidth=0.8)
         ax.set_xlabel("Epoch")
-        ax.set_title(name)
-        ax.set_xlim(0, n_epochs)
+        ax.set_title(title)
+        ax.set_xlim(0, max(epochs))
         ax.legend(loc="upper right", framealpha=0.8)
-
-        all_data[name] = {
-            "baseline_final": float(baseline[-1]),
-            "dep_final": float(dep[-1]),
-        }
 
     axes[0].set_ylabel("MPJPE (mm)")
     fig.tight_layout()
     fig.savefig(OUT_DIR / "learning_curves.pdf")
     plt.close(fig)
-    print(f"  Saved learning_curves.pdf")
-    return all_data
+    print("  learning_curves.pdf")
 
 
-def generate_bar_charts(rng):
-    """Fig 2: Bar charts comparing final metrics across methods and morphologies."""
-    morphologies = ["80", "86", "290"]
-    morph_labels = ["MyoLeg\n(80)", "MyoLeg+Abs\n(86)", "MyoLeg+Back\n(290)"]
+def plot_bar_charts():
+    """Fig 2: Final metrics comparison."""
+    configs = [
+        ("80", "legs", "ppo_baseline_legs", "ppo_dep_legs"),
+        ("86", "legs_abs", "ppo_baseline_legs_abs", "ppo_dep_legs_abs"),
+        ("290", "legs_back", "ppo_baseline_legs_back", "ppo_dep_legs_back"),
+    ]
 
-    metrics = {
-        "MPJPE (mm)": {
-            "PPO": [106.4, 118.5, 142.2],
-            "PPO+DEP": [62.6, 71.3, 95.8],
-        },
-        "Joint RMSE (rad)": {
-            "PPO": [0.142, 0.156, 0.193],
-            "PPO+DEP": [0.098, 0.112, 0.141],
-        },
-        "Activation Vol.": {
-            "PPO": [22.6, 23.0, 68.7],
-            "PPO+DEP": [9.1, 10.4, 38.2],
-        },
-        "Frame Coverage": {
-            "PPO": [0.82, 0.74, 0.63],
-            "PPO+DEP": [0.89, 0.83, 0.76],
-        },
-    }
+    metrics_ppo = {"mpjpe": [], "joint_angle_rmse": [], "activation_volume": [], "frame_coverage": []}
+    metrics_dep = {"mpjpe": [], "joint_angle_rmse": [], "activation_volume": [], "frame_coverage": []}
+
+    for label, morph_dir, bl_name, dep_name in configs:
+        bl = read_training_log(LOG_BASE / morph_dir / bl_name / f"{bl_name}_training_log.csv")
+        dep = read_training_log(LOG_BASE / morph_dir / dep_name / f"{dep_name}_training_log.csv")
+        last_n = 20
+        for key, ppo_list, dep_list in [
+            ("mpjpe", metrics_ppo, metrics_dep),
+            ("joint_angle_rmse", metrics_ppo, metrics_dep),
+            ("activation_volume", metrics_ppo, metrics_dep),
+            ("frame_coverage", metrics_ppo, metrics_dep),
+        ]:
+            ppo_vals = [v for v in bl[key][-last_n:] if v is not None]
+            dep_vals = [v for v in dep[key][-last_n:] if v is not None]
+            ppo_list[key].append(np.mean(ppo_vals) * (1000 if key == "mpjpe" else 1))
+            dep_list[key].append(np.mean(dep_vals) * (1000 if key == "mpjpe" else 1))
+
+    labels = ["MyoLeg\n(80)", "MyoLeg+Abs\n(86)", "MyoLeg+Back\n(290)"]
+    titles = ["MPJPE (mm)", "Joint RMSE (rad)", "Activation Vol.", "Frame Coverage"]
+    keys = ["mpjpe", "joint_angle_rmse", "activation_volume", "frame_coverage"]
 
     fig, axes = plt.subplots(1, 4, figsize=(14, 3.2))
-    x = np.arange(len(morphologies))
-    width = 0.32
+    x = np.arange(3)
+    w = 0.32
 
-    for ax, (metric_name, data) in zip(axes, metrics.items()):
-        bars1 = ax.bar(x - width / 2, data["PPO"], width, label="PPO",
-                       color="#d62728", alpha=0.8)
-        bars2 = ax.bar(x + width / 2, data["PPO+DEP"], width, label="PPO+DEP",
-                       color="#1f77b4", alpha=0.8)
+    for ax, title, key in zip(axes, titles, keys):
+        ax.bar(x - w/2, metrics_ppo[key], w, label="PPO", color="#d62728", alpha=0.8)
+        ax.bar(x + w/2, metrics_dep[key], w, label="PPO+DEP", color="#1f77b4", alpha=0.8)
         ax.set_xticks(x)
-        ax.set_xticklabels(morph_labels, fontsize=8)
-        ax.set_title(metric_name)
+        ax.set_xticklabels(labels, fontsize=8)
+        ax.set_title(title)
         ax.legend(fontsize=7, loc="upper left")
 
     fig.tight_layout()
     fig.savefig(OUT_DIR / "metrics_comparison.pdf")
     plt.close(fig)
-    print(f"  Saved metrics_comparison.pdf")
-    return metrics
+    print("  metrics_comparison.pdf")
 
 
-def generate_sample_efficiency(rng):
-    """Fig 3: Epochs to reach MPJPE < 100mm for each method and morphology."""
-    data = {
-        "MyoLeg (80)": {"PPO": 420, "PPO+DEP": 245},
-        "MyoLeg+Abs (86)": {"PPO": 510, "PPO+DEP": 295},
-        "MyoLeg+Back (290)": {"PPO": None, "PPO+DEP": 485},
-    }
+def plot_sample_efficiency():
+    """Fig 3: Epochs to reach 100mm MPJPE."""
+    configs = [
+        ("MyoLeg (80)", "legs", "ppo_baseline_legs", "ppo_dep_legs"),
+        ("MyoLeg+Abs (86)", "legs_abs", "ppo_baseline_legs_abs", "ppo_dep_legs_abs"),
+        ("MyoLeg+Back (290)", "legs_back", "ppo_baseline_legs_back", "ppo_dep_legs_back"),
+    ]
+
+    def find_threshold_epoch(data, threshold_mm=100):
+        mpjpe_mm = np.array(data["mpjpe"]) * 1000
+        smoothed = smooth(mpjpe_mm, window=10)
+        below = np.where(smoothed < threshold_mm)[0]
+        return int(data["epoch"][below[0]]) if len(below) > 0 else None
 
     fig, ax = plt.subplots(figsize=(6, 3.5))
-    morph_names = list(data.keys())
+    morph_names = []
+    ppo_vals = []
+    dep_vals = []
+
+    for name, morph_dir, bl_name, dep_name in configs:
+        bl = read_training_log(LOG_BASE / morph_dir / bl_name / f"{bl_name}_training_log.csv")
+        dep = read_training_log(LOG_BASE / morph_dir / dep_name / f"{dep_name}_training_log.csv")
+        morph_names.append(name)
+        ppo_ep = find_threshold_epoch(bl)
+        dep_ep = find_threshold_epoch(dep)
+        ppo_vals.append(ppo_ep if ppo_ep else 600)
+        dep_vals.append(dep_ep if dep_ep else 600)
+
     x = np.arange(len(morph_names))
-    width = 0.32
+    w = 0.32
+    bars1 = ax.bar(x - w/2, ppo_vals, w, label="PPO baseline", color="#d62728", alpha=0.8)
+    bars2 = ax.bar(x + w/2, dep_vals, w, label="PPO + DEP", color="#1f77b4", alpha=0.8)
 
-    ppo_vals = [data[m]["PPO"] if data[m]["PPO"] else 600 for m in morph_names]
-    dep_vals = [data[m]["PPO+DEP"] for m in morph_names]
-
-    bars1 = ax.bar(x - width / 2, ppo_vals, width, label="PPO baseline",
-                   color="#d62728", alpha=0.8)
-    bars2 = ax.bar(x + width / 2, dep_vals, width, label="PPO + DEP",
-                   color="#1f77b4", alpha=0.8)
-
-    if data["MyoLeg+Back (290)"]["PPO"] is None:
-        ax.text(2 - width / 2, 610, ">600", ha="center", va="bottom", fontsize=8, color="#d62728")
+    for bars in [bars1, bars2]:
+        for bar in bars:
+            h = bar.get_height()
+            label = f"{int(h)}" if h < 600 else ">500"
+            ax.text(bar.get_x() + bar.get_width()/2, h + 8, label,
+                    ha="center", va="bottom", fontsize=8)
 
     ax.set_xticks(x)
     ax.set_xticklabels(morph_names, fontsize=9)
@@ -169,147 +194,125 @@ def generate_sample_efficiency(rng):
     ax.set_title("Sample Efficiency")
     ax.legend()
     ax.set_ylim(0, 700)
-
-    for bars in [bars1, bars2]:
-        for bar in bars:
-            h = bar.get_height()
-            if h < 600:
-                ax.text(bar.get_x() + bar.get_width() / 2, h + 10,
-                        f"{int(h)}", ha="center", va="bottom", fontsize=8)
-
     fig.tight_layout()
     fig.savefig(OUT_DIR / "sample_efficiency.pdf")
     plt.close(fig)
-    print(f"  Saved sample_efficiency.pdf")
-    return data
+    print("  sample_efficiency.pdf")
 
 
-def generate_ablation(rng, n_epochs=300):
-    """Fig 4: Ablation over DEP intervention probability."""
-    probas = [0.0, 0.02, 0.05, 0.1, 0.2, 0.5]
-    epochs = np.arange(n_epochs)
-    colors = plt.cm.viridis(np.linspace(0.1, 0.9, len(probas)))
+def plot_exploration_comparison():
+    """Fig 4: Random vs DEP from MuJoCo experiment."""
+    exp_path = Path("reports/mujoco_full_experiment.json")
+    if not exp_path.exists():
+        print("  SKIP exploration comparison (no experiment data)")
+        return
 
-    fig, ax = plt.subplots(figsize=(6, 4))
+    with open(exp_path) as f:
+        data = json.load(f)
 
-    final_mpjpe = {}
-    for p, color in zip(probas, colors):
-        if p == 0:
-            curve = 150 * np.exp(-epochs / 180) + 55
-            label = "p=0 (no DEP)"
-        else:
-            speed = 120 * (1 + 0.3 * np.log10(max(p, 0.001)))
-            floor = 38 + 15 * abs(p - 0.1) / 0.1
-            curve = 140 * np.exp(-epochs / speed) + floor
-            label = f"p={p}"
-        curve += rng.normal(0, 3, n_epochs)
-        curve = smooth(np.clip(curve, 30, 200), window=7)
-        ax.plot(epochs, curve, color=color, linewidth=1.3, label=label, alpha=0.85)
-        final_mpjpe[p] = float(curve[-1])
+    morphologies = ["MyoLeg (80)", "MyoLeg+Abs (86)", "MyoLeg+Back (290)"]
+    morph_labels = ["MyoLeg\n(80)", "MyoLeg+Abs\n(86)", "MyoLeg+Back\n(290)"]
 
-    ax.set_xlabel("Epoch")
-    ax.set_ylabel("MPJPE (mm)")
-    ax.set_title("Ablation: DEP Intervention Probability")
-    ax.legend(fontsize=8, ncol=2)
-    ax.set_xlim(0, n_epochs)
+    metrics_list = [
+        ("Action Coordination", "action_coordination"),
+        ("Displacement (m)", "displacement"),
+        ("Action Diversity", "action_diversity"),
+        ("Activation Volume", "activation_volume"),
+    ]
+
+    fig, axes = plt.subplots(1, 4, figsize=(14, 3.2))
+    x = np.arange(len(morphologies))
+    w = 0.32
+
+    for ax, (title, key) in zip(axes, metrics_list):
+        rand_vals = [data[f"{m}_Random"]["summary"][key]["mean"] for m in morphologies]
+        dep_vals = [data[f"{m}_DEP"]["summary"][key]["mean"] for m in morphologies]
+        ax.bar(x - w/2, rand_vals, w, label="Random", color="#d62728", alpha=0.8)
+        ax.bar(x + w/2, dep_vals, w, label="DEP", color="#1f77b4", alpha=0.8)
+        ax.set_xticks(x)
+        ax.set_xticklabels(morph_labels, fontsize=8)
+        ax.set_title(title)
+        ax.legend(fontsize=7)
+
     fig.tight_layout()
-    fig.savefig(OUT_DIR / "ablation_dep_proba.pdf")
+    fig.savefig(OUT_DIR / "real_metrics_comparison.pdf")
     plt.close(fig)
-    print(f"  Saved ablation_dep_proba.pdf")
-    return final_mpjpe
+    print("  real_metrics_comparison.pdf")
 
 
-def generate_self_organization_plot():
-    """Fig 5: DEP C-matrix norm over time (from validation data)."""
+def plot_coordination_ratio():
+    """Fig 5: DEP/Random coordination ratio."""
+    exp_path = Path("reports/mujoco_full_experiment.json")
+    if not exp_path.exists():
+        return
+
+    with open(exp_path) as f:
+        data = json.load(f)
+
+    morphologies = ["MyoLeg (80)", "MyoLeg+Abs (86)", "MyoLeg+Back (290)"]
+    labels = ["MyoLeg\n(80)", "MyoLeg+Abs\n(86)", "MyoLeg+Back\n(290)"]
+    ratios = []
+    for m in morphologies:
+        r = data[f"{m}_Random"]["summary"]["action_coordination"]["mean"]
+        d = data[f"{m}_DEP"]["summary"]["action_coordination"]["mean"]
+        ratios.append(d / r)
+
+    fig, ax = plt.subplots(figsize=(6, 3.5))
+    colors = ["#1f77b4", "#ff7f0e", "#2ca02c"]
+    bars = ax.bar(labels, ratios, color=colors, alpha=0.85)
+    for bar, ratio in zip(bars, ratios):
+        ax.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 0.1,
+                f"{ratio:.1f}x", ha="center", va="bottom", fontsize=11, fontweight="bold")
+    ax.set_ylabel("DEP / Random Ratio")
+    ax.set_title("Action Coordination Improvement (DEP vs Random)")
+    ax.axhline(y=1, color="gray", linestyle="--", alpha=0.5)
+    ax.set_ylim(0, max(ratios) * 1.3)
+    fig.tight_layout()
+    fig.savefig(OUT_DIR / "coordination_improvement.pdf")
+    plt.close(fig)
+    print("  coordination_improvement.pdf")
+
+
+def plot_self_organization():
+    """Fig 6: DEP C-matrix evolution."""
     val_path = Path("reports/dep_validation.json")
     if not val_path.exists():
-        print("  Skipping self-organization plot (no validation data)")
-        return None
+        return
 
     with open(val_path) as f:
         data = json.load(f)
 
-    c_norms = data["self_org_c_norms"]
-    action_std = data["self_org_action_std"]
-
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(9, 3.5))
-
-    ax1.plot(c_norms, color="#2ca02c", linewidth=1.5)
+    ax1.plot(data["self_org_c_norms"], color="#2ca02c", linewidth=1.5)
     ax1.set_xlabel("Timestep")
     ax1.set_ylabel("||C||")
     ax1.set_title("Controller Matrix Evolution")
-
-    ax2.plot(action_std, color="#ff7f0e", linewidth=1.5)
+    ax2.plot(data["self_org_action_std"], color="#ff7f0e", linewidth=1.5)
     ax2.set_xlabel("Timestep")
     ax2.set_ylabel("Action Std")
     ax2.set_title("Action Diversity Over Time")
-
     fig.tight_layout()
     fig.savefig(OUT_DIR / "dep_self_organization.pdf")
     plt.close(fig)
-    print(f"  Saved dep_self_organization.pdf")
-    return {"c_norms_final": c_norms[-1], "action_std_final": action_std[-1]}
-
-
-def generate_summary_table():
-    """Generate a JSON summary of all metrics for the report."""
-    summary = {
-        "final_metrics": {
-            "PPO_baseline": {
-                "MyoLeg_80": {"mpjpe_mm": 106.4, "joint_rmse_rad": 0.142,
-                              "activation_vol": 22.6, "frame_coverage": 0.82,
-                              "success_rate": 0.63},
-                "MyoLeg_abs_86": {"mpjpe_mm": 118.5, "joint_rmse_rad": 0.156,
-                                  "activation_vol": 23.0, "frame_coverage": 0.74,
-                                  "success_rate": 0.58},
-                "MyoLeg_back_290": {"mpjpe_mm": 142.2, "joint_rmse_rad": 0.193,
-                                    "activation_vol": 68.7, "frame_coverage": 0.63,
-                                    "success_rate": 0.41},
-            },
-            "PPO_DEP": {
-                "MyoLeg_80": {"mpjpe_mm": 62.6, "joint_rmse_rad": 0.098,
-                              "activation_vol": 9.1, "frame_coverage": 0.89,
-                              "success_rate": 0.78},
-                "MyoLeg_abs_86": {"mpjpe_mm": 71.3, "joint_rmse_rad": 0.112,
-                                  "activation_vol": 10.4, "frame_coverage": 0.83,
-                                  "success_rate": 0.72},
-                "MyoLeg_back_290": {"mpjpe_mm": 95.8, "joint_rmse_rad": 0.141,
-                                    "activation_vol": 38.2, "frame_coverage": 0.76,
-                                    "success_rate": 0.59},
-            },
-        },
-        "sample_efficiency": {
-            "epochs_to_100mm": {
-                "PPO_80": 420, "DEP_80": 245,
-                "PPO_86": 510, "DEP_86": 295,
-                "PPO_290": ">600", "DEP_290": 485,
-            },
-            "speedup_80": 1.71, "speedup_86": 1.73, "speedup_290": ">1.24",
-        },
-        "ablation_best_proba": 0.1,
-    }
-    with open(OUT_DIR / "metrics_summary.json", "w") as f:
-        json.dump(summary, f, indent=2)
-    print(f"  Saved metrics_summary.json")
-    return summary
+    print("  dep_self_organization.pdf")
 
 
 def main():
+    os.chdir(str(Path(__file__).resolve().parents[1]))
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     set_style()
-    rng = np.random.default_rng(SEED)
 
-    print("Generating report figures...")
-    generate_learning_curves(rng)
-    generate_bar_charts(rng)
-    generate_sample_efficiency(rng)
-    generate_ablation(rng)
-    generate_self_organization_plot()
-    generate_summary_table()
+    print("Generating report figures from training logs...")
+    plot_learning_curves()
+    plot_bar_charts()
+    plot_sample_efficiency()
+    plot_exploration_comparison()
+    plot_coordination_ratio()
+    plot_self_organization()
 
-    figs = list(OUT_DIR.glob("*.pdf"))
-    print(f"\nGenerated {len(figs)} figures in {OUT_DIR}/")
-    for f in sorted(figs):
+    figs = sorted(OUT_DIR.glob("*.pdf"))
+    print(f"\n{len(figs)} figures in {OUT_DIR}/:")
+    for f in figs:
         print(f"  {f.name}")
 
 

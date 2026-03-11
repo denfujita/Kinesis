@@ -58,6 +58,7 @@ class AgentHumanoid(AgentPPO, ABC):
         self.setup_value()
         self.setup_optimizer()
         self.setup_dep_exploration()
+        self.setup_csv_logger()
         self.seed(cfg.seed)
         self.print_config()
         self.load_checkpoint(checkpoint_epoch)
@@ -154,6 +155,13 @@ class AgentHumanoid(AgentPPO, ABC):
             )
         )
         to_device(self.device, self.value_net)
+
+    def setup_csv_logger(self) -> None:
+        """Set up CSV training logger for recording per-epoch metrics."""
+        from src.utils.csv_logger import CSVTrainingLogger
+        out_dir = self.cfg.get("output_dir", "data/trained_models/default")
+        exp_name = self.cfg.get("exp_name", "kinesis")
+        self.csv_logger = CSVTrainingLogger(out_dir, exp_name)
 
     def setup_dep_exploration(self) -> None:
         """
@@ -403,6 +411,8 @@ class AgentHumanoid(AgentPPO, ABC):
             }
 
             loggers = self.log_train(info)
+            if hasattr(self, "csv_logger"):
+                self.csv_logger.log_epoch(self.epoch, loggers, info)
             eps_len_list.append(loggers.avg_episode_len)
             self.after_epoch()
 

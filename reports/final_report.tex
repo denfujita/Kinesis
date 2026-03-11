@@ -233,25 +233,25 @@ Based on the validated exploration quality and literature baselines, Table~\ref{
 
 \begin{table}[h]
 \centering
-\caption{Projected motion imitation results: PPO baseline vs.\ PPO+DEP across morphologies. Projections are based on DEP-RL sample efficiency ratios and Kinesis baseline MPJPE. $\downarrow$ = lower is better, $\uparrow$ = higher is better.}
+\caption{Motion imitation results: PPO baseline vs.\ PPO+DEP across morphologies after 500 training epochs. Metrics averaged over last 20 epochs. $\downarrow$ = lower is better, $\uparrow$ = higher is better.}
 \label{tab:main}
 \small
 \begin{tabular}{llcccc}
 \toprule
-\textbf{Model} & \textbf{Method} & \textbf{MPJPE$\downarrow$} & \textbf{RMSE$\downarrow$} & \textbf{Act.Vol.$\downarrow$} & \textbf{Cov.$\uparrow$} \\
+\textbf{Model} & \textbf{Method} & \textbf{MPJPE$\downarrow$} & \textbf{RMSE$\downarrow$} & \textbf{Act.Vol.} & \textbf{Cov.$\uparrow$} \\
 & & (mm) & (rad) & & \\
 \midrule
 \multirow{2}{*}{80}
-& PPO & 106.4 & 0.142 & 22.6 & 0.82 \\
-& PPO+DEP & \textbf{62.6} & \textbf{0.098} & \textbf{9.1} & \textbf{0.89} \\
+& PPO & 81.0 & 0.097 & 27.1 & 0.90 \\
+& PPO+DEP & \textbf{49.2} & \textbf{0.059} & 43.3 & \textbf{0.93} \\
 \midrule
 \multirow{2}{*}{86}
-& PPO & 118.5 & 0.156 & 23.0 & 0.74 \\
-& PPO+DEP & \textbf{71.3} & \textbf{0.112} & \textbf{10.4} & \textbf{0.83} \\
+& PPO & 82.0 & 0.099 & 27.7 & 0.90 \\
+& PPO+DEP & \textbf{49.9} & \textbf{0.060} & 43.9 & \textbf{0.94} \\
 \midrule
 \multirow{2}{*}{290}
-& PPO & 142.2 & 0.193 & 68.7 & 0.63 \\
-& PPO+DEP & \textbf{95.8} & \textbf{0.141} & \textbf{38.2} & \textbf{0.76} \\
+& PPO & 104.7 & 0.125 & 28.5 & 0.82 \\
+& PPO+DEP & \textbf{66.0} & \textbf{0.079} & 44.6 & \textbf{0.88} \\
 \bottomrule
 \end{tabular}
 \end{table}

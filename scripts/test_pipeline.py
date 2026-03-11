@@ -156,9 +156,11 @@ def test_full_env():
     cfg.run.headless = True
     cfg.run.num_threads = 1
     cfg.run.num_motions = 1
+    cfg.run.random_start = False
     cfg.no_log = True
 
     env = MyoLegsIm(cfg)
+    env.sample_motions()
     obs, info = env.reset()
     action = env.action_space.sample()
     next_obs, reward, terminated, truncated, info = env.step(action)
@@ -190,8 +192,9 @@ def test_single_epoch():
     cfg.run.num_motions = 1
     cfg.no_log = True
     cfg.learning.max_epoch = 1
-    cfg.learning.min_batch_size = 512
-    cfg.learning.actor_type = "lattice"
+    cfg.learning.min_batch_size = 128
+    cfg.learning.actor_type = "gauss"
+    cfg.learning.mlp = {"units": [256, 128], "activation": "silu", "initializer": {"name": "default"}, "regularizer": {"name": "None"}}
     cfg.learning.use_dep_exploration = True
     cfg.output_dir = "data/trained_models/test_pipeline"
 

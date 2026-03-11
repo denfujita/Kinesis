@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.12.17)  10 MAR 2026 22:49
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.12.17)  11 MAR 2026 01:41
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -571,7 +571,7 @@ Package pdfcol Info: New color stack `tcb@breakable' = 1 on input line 23.
 Package: helvet 2020/03/25 PSNFSS-v9.3 (WaS) 
 )
 LaTeX Font Info:    Trying to load font information for OT1+phv on input line 4
-4.
+3.
 
 (/usr/local/texlive/2024/texmf-dist/tex/latex/psnfss/ot1phv.fd
 File: ot1phv.fd 2020/03/25 scalable font definitions for OT1/phv.
@@ -584,20 +584,20 @@ File: l3backend-pdftex.def 2024-02-20 L3 backend support: PDF output (pdfTeX)
 (./poster.aux)
 \openout1 = `poster.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 44.
-LaTeX Font Info:    ... okay on input line 44.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 44.
-LaTeX Font Info:    ... okay on input line 44.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 44.
-LaTeX Font Info:    ... okay on input line 44.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 44.
-LaTeX Font Info:    ... okay on input line 44.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 44.
-LaTeX Font Info:    ... okay on input line 44.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 44.
-LaTeX Font Info:    ... okay on input line 44.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 44.
-LaTeX Font Info:    ... okay on input line 44.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 43.
+LaTeX Font Info:    ... okay on input line 43.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 43.
+LaTeX Font Info:    ... okay on input line 43.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 43.
+LaTeX Font Info:    ... okay on input line 43.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 43.
+LaTeX Font Info:    ... okay on input line 43.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 43.
+LaTeX Font Info:    ... okay on input line 43.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 43.
+LaTeX Font Info:    ... okay on input line 43.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 43.
+LaTeX Font Info:    ... okay on input line 43.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -607,15 +607,15 @@ LaTeX Font Info:    ... okay on input line 44.
 * layout: <same size as paper>
 * layoutoffset:(h,v)=(0.0pt,0.0pt)
 * modes: landscape 
-* h-part:(L,W,R)=(43.36243pt, 2081.37514pt, 43.36243pt)
-* v-part:(T,H,B)=(43.36243pt, 1358.67514pt, 43.36243pt)
+* h-part:(L,W,R)=(28.90755pt, 2110.2849pt, 28.90755pt)
+* v-part:(T,H,B)=(28.90755pt, 1387.5849pt, 28.90755pt)
 * \paperwidth=2168.09999pt
 * \paperheight=1445.4pt
-* \textwidth=2081.37514pt
-* \textheight=1358.67514pt
-* \oddsidemargin=-28.90756pt
-* \evensidemargin=-28.90756pt
-* \topmargin=-65.90756pt
+* \textwidth=2110.2849pt
+* \textheight=1387.5849pt
+* \oddsidemargin=-43.36244pt
+* \evensidemargin=-43.36244pt
+* \topmargin=-80.36244pt
 * \headheight=12.0pt
 * \headsep=25.0pt
 * \topskip=10.0pt
@@ -655,19 +655,31 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-LaTeX Font Info:    Calculating math sizes for size <16> on input line 69.
+LaTeX Font Info:    Calculating math sizes for size <13> on input line 69.
 
 
-LaTeX Font Warning: Font shape `OT1/cmr/m/n' in size <16> not available
-(Font)              size <17.28> substituted on input line 69.
+LaTeX Font Warning: Font shape `OT1/cmr/m/n' in size <13> not available
+(Font)              size <12> substituted on input line 69.
 
 
-LaTeX Font Warning: Font shape `OML/cmm/m/it' in size <16> not available
-(Font)              size <17.28> substituted on input line 69.
+LaTeX Font Warning: Font shape `OT1/cmr/m/n' in size <6.5> not available
+(Font)              size <6> substituted on input line 69.
 
 
-LaTeX Font Warning: Font shape `OMS/cmsy/m/n' in size <16> not available
-(Font)              size <17.28> substituted on input line 69.
+LaTeX Font Warning: Font shape `OML/cmm/m/it' in size <13> not available
+(Font)              size <12> substituted on input line 69.
+
+
+LaTeX Font Warning: Font shape `OML/cmm/m/it' in size <6.5> not available
+(Font)              size <6> substituted on input line 69.
+
+
+LaTeX Font Warning: Font shape `OMS/cmsy/m/n' in size <13> not available
+(Font)              size <12> substituted on input line 69.
+
+
+LaTeX Font Warning: Font shape `OMS/cmsy/m/n' in size <6.5> not available
+(Font)              size <6> substituted on input line 69.
 
 LaTeX Font Info:    Trying to load font information for U+msa on input line 69.
 
@@ -680,93 +692,138 @@ LaTeX Font Info:    Trying to load font information for U+msb on input line 69.
 (/usr/local/texlive/2024/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-LaTeX Font Info:    Font shape `OT1/phv/m/it' in size <16> not available
-(Font)              Font shape `OT1/phv/m/sl' tried instead on input line 79.
-LaTeX Font Info:    Trying to load font information for TS1+phv on input line 9
-3.
+Underfull \hbox (badness 2150) in paragraph at lines 75--76
+[]\OT1/phv/b/n/13 DEP-RL \OT1/phv/m/n/13 [2] showed that Dif-fer-en-tial Ex-tri
+n-sic Plasticity---a self-organization
+ []
 
-(/usr/local/texlive/2024/texmf-dist/tex/latex/psnfss/ts1phv.fd
-File: ts1phv.fd 2020/03/25 scalable font definitions for TS1/phv.
-)
 
-LaTeX Font Warning: Font shape `OT1/cmr/bx/n' in size <16> not available
-(Font)              size <17.28> substituted on input line 123.
+LaTeX Font Warning: Font shape `OT1/cmr/bx/n' in size <13> not available
+(Font)              size <12> substituted on input line 138.
+
+
+LaTeX Font Warning: Font shape `OT1/cmr/bx/n' in size <6.5> not available
+(Font)              size <6> substituted on input line 138.
+
+LaTeX Font Info:    Calculating math sizes for size <12.5> on input line 156.
+
+LaTeX Font Warning: Font shape `OT1/cmr/m/n' in size <12.5> not available
+(Font)              size <12> substituted on input line 156.
+
+
+LaTeX Font Warning: Font shape `OML/cmm/m/it' in size <12.5> not available
+(Font)              size <12> substituted on input line 156.
+
+
+LaTeX Font Warning: Font shape `OMS/cmsy/m/n' in size <12.5> not available
+(Font)              size <12> substituted on input line 156.
+
+
+LaTeX Font Warning: Font shape `OT1/cmr/bx/n' in size <12.5> not available
+(Font)              size <12> substituted on input line 156.
 
 <figures/dep_self_organization.pdf, id=4, 643.0203pt x 246.55112pt>
 File: figures/dep_self_organization.pdf Graphic file (type pdf)
 <use figures/dep_self_organization.pdf>
 Package pdftex.def Info: figures/dep_self_organization.pdf  used on input line 
-132.
-(pdftex.def)             Requested size: 627.5042pt x 240.60643pt.
-LaTeX Font Info:    Calculating math sizes for size <14> on input line 147.
-LaTeX Font Info:    Calculating math sizes for size <28> on input line 170.
+178.
+(pdftex.def)             Requested size: 388.87018pt x 149.10556pt.
+LaTeX Font Info:    Calculating math sizes for size <18> on input line 188.
 
-LaTeX Font Warning: Font shape `OT1/cmr/m/n' in size <28> not available
-(Font)              size <24.88> substituted on input line 170.
-
-
-LaTeX Font Warning: Font shape `OT1/cmr/m/n' in size <19.59991> not available
-(Font)              size <20.74> substituted on input line 170.
+LaTeX Font Warning: Font shape `OT1/cmr/m/n' in size <18> not available
+(Font)              size <17.28> substituted on input line 188.
 
 
-LaTeX Font Warning: Font shape `OML/cmm/m/it' in size <28> not available
-(Font)              size <24.88> substituted on input line 170.
+LaTeX Font Warning: Font shape `OT1/cmr/m/n' in size <12.59995> not available
+(Font)              size <12> substituted on input line 188.
 
 
-LaTeX Font Warning: Font shape `OML/cmm/m/it' in size <19.59991> not available
-(Font)              size <20.74> substituted on input line 170.
+LaTeX Font Warning: Font shape `OML/cmm/m/it' in size <18> not available
+(Font)              size <17.28> substituted on input line 188.
 
 
-LaTeX Font Warning: Font shape `OMS/cmsy/m/n' in size <28> not available
-(Font)              size <24.88> substituted on input line 170.
+LaTeX Font Warning: Font shape `OML/cmm/m/it' in size <12.59995> not available
+(Font)              size <12> substituted on input line 188.
 
 
-LaTeX Font Warning: Font shape `OMS/cmsy/m/n' in size <19.59991> not available
-(Font)              size <20.74> substituted on input line 170.
+LaTeX Font Warning: Font shape `OMS/cmsy/m/n' in size <18> not available
+(Font)              size <17.28> substituted on input line 188.
 
 
-LaTeX Font Warning: Font shape `OT1/cmr/bx/n' in size <28> not available
-(Font)              size <24.88> substituted on input line 170.
+LaTeX Font Warning: Font shape `OMS/cmsy/m/n' in size <12.59995> not available
+(Font)              size <12> substituted on input line 188.
 
 
-LaTeX Font Warning: Font shape `OT1/cmr/bx/n' in size <19.59991> not available
-(Font)              size <20.74> substituted on input line 170.
+LaTeX Font Warning: Font shape `OT1/cmr/bx/n' in size <18> not available
+(Font)              size <17.28> substituted on input line 188.
 
-<figures/real_metrics_comparison.pdf, id=5, 1001.29631pt x 223.44617pt>
+
+LaTeX Font Warning: Font shape `OT1/cmr/bx/n' in size <12.59995> not available
+(Font)              size <12> substituted on input line 188.
+
+<figures/learning_curves.pdf, id=5, 860.18771pt x 246.50595pt>
+File: figures/learning_curves.pdf Graphic file (type pdf)
+<use figures/learning_curves.pdf>
+Package pdftex.def Info: figures/learning_curves.pdf  used on input line 208.
+(pdftex.def)             Requested size: 530.69199pt x 152.09111pt.
+<figures/real_metrics_comparison.pdf, id=6, 1001.29631pt x 223.44617pt>
 File: figures/real_metrics_comparison.pdf Graphic file (type pdf)
 <use figures/real_metrics_comparison.pdf>
 Package pdftex.def Info: figures/real_metrics_comparison.pdf  used on input lin
-e 190.
-(pdftex.def)             Requested size: 726.97774pt x 162.23468pt.
-<figures/coordination_improvement.pdf, id=6, 426.92123pt x 246.18135pt>
+e 221.
+(pdftex.def)             Requested size: 530.69199pt x 118.43271pt.
+<figures/coordination_improvement.pdf, id=7, 426.92123pt x 246.18135pt>
 File: figures/coordination_improvement.pdf Graphic file (type pdf)
 <use figures/coordination_improvement.pdf>
 Package pdftex.def Info: figures/coordination_improvement.pdf  used on input li
-ne 203.
-(pdftex.def)             Requested size: 512.52357pt x 295.5739pt.
-File: figures/dep_self_organization.pdf Graphic file (type pdf)
-<use figures/dep_self_organization.pdf>
-Package pdftex.def Info: figures/dep_self_organization.pdf  used on input line 
-216.
-(pdftex.def)             Requested size: 550.829pt x 211.20592pt.
+ne 234.
+(pdftex.def)             Requested size: 290.13005pt x 167.30342pt.
+LaTeX Font Info:    Calculating math sizes for size <11.5> on input line 238.
+
+LaTeX Font Warning: Font shape `OT1/cmr/m/n' in size <11.5> not available
+(Font)              size <12> substituted on input line 238.
+
+
+LaTeX Font Warning: Font shape `OML/cmm/m/it' in size <11.5> not available
+(Font)              size <12> substituted on input line 238.
+
+
+LaTeX Font Warning: Font shape `OMS/cmsy/m/n' in size <11.5> not available
+(Font)              size <12> substituted on input line 238.
+
+
+LaTeX Font Warning: Font shape `OT1/cmr/bx/n' in size <11.5> not available
+(Font)              size <12> substituted on input line 238.
+
+<figures/sample_efficiency.pdf, id=8, 426.86978pt x 246.0022pt>
+File: figures/sample_efficiency.pdf Graphic file (type pdf)
+<use figures/sample_efficiency.pdf>
+Package pdftex.def Info: figures/sample_efficiency.pdf  used on input line 243.
+
+(pdftex.def)             Requested size: 290.13005pt x 167.20795pt.
+LaTeX Font Info:    Font shape `OT1/phv/m/it' in size <13> not available
+(Font)              Font shape `OT1/phv/m/sl' tried instead on input line 262.
 LaTeX Font Info:    Trying to load font information for OMS+phv on input line 2
-34.
+67.
 (/usr/local/texlive/2024/texmf-dist/tex/latex/psnfss/omsphv.fd
 File: omsphv.fd 
 )
-LaTeX Font Info:    Font shape `OMS/phv/m/n' in size <16> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 234.
+LaTeX Font Info:    Font shape `OMS/phv/m/n' in size <13> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 267.
 
 
-LaTeX Font Warning: Font shape `OMS/cmsy/m/n' in size <16> not available
-(Font)              size <17.28> substituted on input line 234.
+LaTeX Font Warning: Font shape `OMS/cmsy/m/n' in size <13> not available
+(Font)              size <12> substituted on input line 267.
 
+LaTeX Font Info:    Font shape `OT1/phv/m/it' in size <12.5> not available
+(Font)              Font shape `OT1/phv/m/sl' tried instead on input line 279.
 [1
 
 {/usr/local/texlive/2024/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{/usr/loc
 al/texlive/2024/texmf-dist/fonts/enc/dvips/base/8r.enc} <./figures/dep_self_org
-anization.pdf> <./figures/real_metrics_comparison.pdf> <./figures/coordination_
-improvement.pdf>] (./poster.aux)
+anization.pdf> <./figures/learning_curves.pdf> <./figures/real_metrics_comparis
+on.pdf> <./figures/coordination_improvement.pdf> <./figures/sample_efficiency.p
+df>] (./poster.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-02-20>
@@ -774,33 +831,34 @@ L3 programming layer <2024-02-20>
 
 
 LaTeX Font Warning: Size substitutions with differences
-(Font)              up to 3.12pt have occurred.
+(Font)              up to 1.0pt have occurred.
 
  ) 
 Here is how much of TeX's memory you used:
- 18490 strings out of 474116
- 391952 string characters out of 5743681
- 1954187 words of memory out of 5000000
- 40528 multiletter control sequences out of 15000+600000
- 594432 words of font info for 115 fonts, out of 8000000 for 9000
+ 18519 strings out of 474116
+ 392657 string characters out of 5743681
+ 1970187 words of memory out of 5000000
+ 40550 multiletter control sequences out of 15000+600000
+ 598482 words of font info for 124 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 84i,13n,87p,409b,609s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
-></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb>
-</usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><
+ 84i,14n,87p,565b,601s stack positions out of 10000i,1000n,20000p,200000b,200000s
+</usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb>
+</usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><
 /usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></
-usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></us
-r/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/
-local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/loc
-al/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/loca
-l/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/
-local/texlive/2024/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/local/t
-exlive/2024/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/local/texlive/
-2024/texmf-dist/fonts/type1/urw/helvetic/uhvro8a.pfb>
-Output written on poster.pdf (1 page, 164270 bytes).
+usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></us
+r/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/
+local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/loc
+al/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/
+texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/t
+exlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/local/tex
+live/2024/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local
+/texlive/2024/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/local/texliv
+e/2024/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/local/texlive/2024/
+texmf-dist/fonts/type1/urw/helvetic/uhvro8a.pfb>
+Output written on poster.pdf (1 page, 229830 bytes).
 PDF statistics:
- 217 PDF objects out of 1000 (max. 8388607)
- 63 compressed objects within 1 object stream
+ 314 PDF objects out of 1000 (max. 8388607)
+ 76 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 28 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 38 words of extra memory for PDF output out of 10000 (max. 10000000)
 
