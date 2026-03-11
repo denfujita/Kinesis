@@ -1,0 +1,188 @@
+{
+  "MyoLeg (80)_Random": {
+    "summary": {
+      "displacement": {
+        "mean": 0.020812277376921248,
+        "std": 0.0005406407611950776
+      },
+      "activation_volume": {
+        "mean": 26.659055709838867,
+        "std": 0.1280876937439229
+      },
+      "action_coordination": {
+        "mean": 0.04609385414259428,
+        "std": 0.0007666596418487758
+      },
+      "action_diversity": {
+        "mean": 0.5762485384941101,
+        "std": 0.0012978189889763854
+      },
+      "upright_fraction": {
+        "mean": 1.0,
+        "std": 0.0
+      },
+      "mean_root_height": {
+        "mean": 1.0253948056656141,
+        "std": 0.0003190155725804718
+      }
+    },
+    "n_muscles": 80,
+    "method": "Random",
+    "morphology": "MyoLeg (80)"
+  },
+  "MyoLeg (80)_DEP": {
+    "summary": {
+      "displacement": {
+        "mean": 0.04163411888202558,
+        "std": 6.938893903907228e-18
+      },
+      "activation_volume": {
+        "mean": 43.12498092651367,
+        "std": 0.0
+      },
+      "action_coordination": {
+        "mean": 0.3275625203847027,
+        "std": 1.1102230246251565e-16
+      },
+      "action_diversity": {
+        "mean": 0.9260025024414062,
+        "std": 0.0
+      },
+      "upright_fraction": {
+        "mean": 1.0,
+        "std": 0.0
+      },
+      "mean_root_height": {
+        "mean": 1.027074337844576,
+        "std": 0.0
+      }
+    },
+    "n_muscles": 80,
+    "method": "DEP",
+    "morphology": "MyoLeg (80)"
+  },
+  "MyoLeg+Abs (86)_Random": {
+    "summary": {
+      "displacement": {
+        "mean": 0.06871872953545335,
+        "std": 0.010966884908293999
+      },
+      "activation_volume": {
+        "mean": 28.658793131510418,
+        "std": 0.12139336037522264
+      },
+      "action_coordination": {
+        "mean": 0.04625380497646771,
+        "std": 0.0006614114740461152
+      },
+      "action_diversity": {
+        "mean": 0.5761718392372132,
+        "std": 0.0015270797043457187
+      },
+      "upright_fraction": {
+        "mean": 1.0,
+        "std": 0.0
+      },
+      "mean_root_height": {
+        "mean": 1.0232360708666228,
+        "std": 0.00029303816192572914
+      }
+    },
+    "n_muscles": 86,
+    "method": "Random",
+    "morphology": "MyoLeg+Abs (86)"
+  },
+  "MyoLeg+Abs (86)_DEP": {
+    "summary": {
+      "displacement": {
+        "mean": 0.06925314270458406,
+        "std": 0.0
+      },
+      "activation_volume": {
+        "mean": 46.922603607177734,
+        "std": 0.0
+      },
+      "action_coordination": {
+        "mean": 0.30596924405724957,
+        "std": 5.551115123125783e-17
+      },
+      "action_diversity": {
+        "mean": 0.868684709072113,
+        "std": 0.0
+      },
+      "upright_fraction": {
+        "mean": 1.0,
+        "std": 0.0
+      },
+      "mean_root_height": {
+        "mean": 1.0171956407503588,
+        "std": 2.220446049250313e-16
+      }
+    },
+    "n_muscles": 86,
+    "method": "DEP",
+    "morphology": "MyoLeg+Abs (86)"
+  },
+  "MyoLeg+Back (290)_Random": {
+    "summary": {
+      "displacement": {
+        "mean": 0.22427647122260683,
+        "std": 0.00044371663177046
+      },
+      "activation_volume": {
+        "mean": 96.63406270345052,
+        "std": 0.24100886030383897
+      },
+      "action_coordination": {
+        "mean": 0.04622929636572208,
+        "std": 0.0001549216923008777
+      },
+      "action_diversity": {
+        "mean": 0.5759165167808533,
+        "std": 0.0007545027129888169
+      },
+      "upright_fraction": {
+        "mean": 1.0,
+        "std": 0.0
+      },
+      "mean_root_height": {
+        "mean": 1.0288742258051162,
+        "std": 0.0006017809008096217
+      }
+    },
+    "n_muscles": 290,
+    "method": "Random",
+    "morphology": "MyoLeg+Back (290)"
+  },
+  "MyoLeg+Back (290)_DEP": {
+    "summary": {
+      "displacement": {
+        "mean": 0.21418845344139834,
+        "std": 5.551115123125783e-17
+      },
+      "activation_volume": {
+        "mean": 176.3202667236328,
+        "std": 0.0
+      },
+      "action_coordination": {
+        "mean": 0.3492935326655732,
+        "std": 0.0
+      },
+      "action_diversity": {
+        "mean": 0.8558212518692017,
+        "std": 0.0
+      },
+      "upright_fraction": {
+        "mean": 1.0,
+        "std": 0.0
+      },
+      "mean_root_height": {
+        "mean": 1.0202055281678961,
+        "std": 2.220446049250313e-16
+      }
+    },
+    "n_muscles": 290,
+    "method": "DEP",
+    "morphology": "MyoLeg+Back (290)"
+  }
+}

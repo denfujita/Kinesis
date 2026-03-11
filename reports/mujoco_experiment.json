@@ -1,0 +1,502 @@
+{
+  "Random": {
+    "episodes": [
+      {
+        "displacement": 0.04644131392719209,
+        "activation_volume": 26.5368709564209,
+        "action_coordination": 0.05770283069153692,
+        "state_coverage": 0.00027263023828547447,
+        "upright_fraction": 1.0,
+        "mean_root_height": 1.012917860385271,
+        "final_height": 1.0435663406158806
+      },
+      {
+        "displacement": 0.046461386968150775,
+        "activation_volume": 26.904272079467773,
+        "action_coordination": 0.05552849422320237,
+        "state_coverage": 0.00027892182113271874,
+        "upright_fraction": 1.0,
+        "mean_root_height": 1.012669739867295,
+        "final_height": 1.0441738500588313
+      },
+      {
+        "displacement": 0.04702613972964456,
+        "activation_volume": 26.714439392089844,
+        "action_coordination": 0.056350435306358665,
+        "state_coverage": 0.00028932857395927734,
+        "upright_fraction": 1.0,
+        "mean_root_height": 1.0121365490024101,
+        "final_height": 1.0448714927635174
+      },
+      {
+        "displacement": 0.04659216535313737,
+        "activation_volume": 26.722654342651367,
+        "action_coordination": 0.05754796565146057,
+        "state_coverage": 0.00027872506952679384,
+        "upright_fraction": 1.0,
+        "mean_root_height": 1.0123468512911666,
+        "final_height": 1.044287907663323
+      },
+      {
+        "displacement": 0.04679738991327605,
+        "activation_volume": 26.860267639160156,
+        "action_coordination": 0.05639351359713433,
+        "state_coverage": 0.0002793843959809067,
+        "upright_fraction": 1.0,
+        "mean_root_height": 1.0120819491354454,
+        "final_height": 1.0436856390714953
+      },
+      {
+        "displacement": 0.04687564149029264,
+        "activation_volume": 26.4920597076416,
+        "action_coordination": 0.05564575887416063,
+        "state_coverage": 0.0002892158721681959,
+        "upright_fraction": 1.0,
+        "mean_root_height": 1.0127821918622728,
+        "final_height": 1.0446549843239579
+      },
+      {
+        "displacement": 0.04632258713091943,
+        "activation_volume": 26.742048263549805,
+        "action_coordination": 0.05587559552701011,
+        "state_coverage": 0.00027893564903138654,
+        "upright_fraction": 1.0,
+        "mean_root_height": 1.0135557208322963,
+        "final_height": 1.0449708433384763
+      },
+      {
+        "displacement": 0.04676007473732414,
+        "activation_volume": 26.74492645263672,
+        "action_coordination": 0.055580968146281086,
+        "state_coverage": 0.0002817214172210488,
+        "upright_fraction": 1.0,
+        "mean_root_height": 1.0129350297320774,
+        "final_height": 1.0439291108299211
+      },
+      {
+        "displacement": 0.04686530154233367,
+        "activation_volume": 26.42844009399414,
+        "action_coordination": 0.055244449025437875,
+        "state_coverage": 0.00028393359420209025,
+        "upright_fraction": 1.0,
+        "mean_root_height": 1.012513360236255,
+        "final_height": 1.0445781408610721
+      },
+      {
+        "displacement": 0.04652901540322958,
+        "activation_volume": 26.9921817779541,
+        "action_coordination": 0.05528314133560468,
+        "state_coverage": 0.00027609025752847673,
+        "upright_fraction": 1.0,
+        "mean_root_height": 1.011936872916309,
+        "final_height": 1.0437672337009403
+      },
+      {
+        "displacement": 0.046724011287998746,
+        "activation_volume": 26.656522750854492,
+        "action_coordination": 0.058059231313071,
+        "state_coverage": 0.0002817782191340007,
+        "upright_fraction": 1.0,
+        "mean_root_height": 1.012399813655567,
+        "final_height": 1.0444723410486874
+      },
+      {
+        "displacement": 0.046648812566698054,
+        "activation_volume": 26.283143997192383,
+        "action_coordination": 0.0557472788704874,
+        "state_coverage": 0.00028015556889187364,
+        "upright_fraction": 1.0,
+        "mean_root_height": 1.012412166913632,
+        "final_height": 1.0437349654648884
+      },
+      {
+        "displacement": 0.04644958057442891,
+        "activation_volume": 26.65011215209961,
+        "action_coordination": 0.05766810323678044,
+        "state_coverage": 0.00027719027133515386,
+        "upright_fraction": 1.0,
+        "mean_root_height": 1.0126403930475614,
+        "final_height": 1.0445772821905432
+      },
+      {
+        "displacement": 0.046956324755024585,
+        "activation_volume": 26.969688415527344,
+        "action_coordination": 0.056933336420927516,
+        "state_coverage": 0.0002808811707361515,
+        "upright_fraction": 1.0,
+        "mean_root_height": 1.012175091852945,
+        "final_height": 1.0432192455939175
+      },
+      {
+        "displacement": 0.04703216387933757,
+        "activation_volume": 26.806169509887695,
+        "action_coordination": 0.056917330405565215,
+        "state_coverage": 0.0002868607036267694,
+        "upright_fraction": 1.0,
+        "mean_root_height": 1.0118606408370805,
+        "final_height": 1.0442301006127315
+      },
+      {
+        "displacement": 0.04677547033591185,
+        "activation_volume": 26.55145263671875,
+        "action_coordination": 0.056888467499146333,
+        "state_coverage": 0.0002835418933568639,
+        "upright_fraction": 1.0,
+        "mean_root_height": 1.0121039673932395,
+        "final_height": 1.04404113784398
+      },
+      {
+        "displacement": 0.04653356124361629,
+        "activation_volume": 26.623062133789062,
+        "action_coordination": 0.056394954524818214,
+        "state_coverage": 0.00027808855037594654,
+        "upright_fraction": 1.0,
+        "mean_root_height": 1.0127397917071397,
+        "final_height": 1.0439650705629424
+      },
+      {
+        "displacement": 0.04679701470780697,
+        "activation_volume": 26.650981903076172,
+        "action_coordination": 0.0566535526022838,
+        "state_coverage": 0.00028201325228082965,
+        "upright_fraction": 1.0,
+        "mean_root_height": 1.0131207926706152,
+        "final_height": 1.044667878611431
+      },
+      {
+        "displacement": 0.046521733139205684,
+        "activation_volume": 26.3132381439209,
+        "action_coordination": 0.055649237614198516,
+        "state_coverage": 0.00027972487147896405,
+        "upright_fraction": 1.0,
+        "mean_root_height": 1.0126473868045407,
+        "final_height": 1.044126437547298
+      },
+      {
+        "displacement": 0.04664370509278438,
+        "activation_volume": 26.754638671875,
+        "action_coordination": 0.054485762790796734,
+        "state_coverage": 0.00028082393557108515,
+        "upright_fraction": 1.0,
+        "mean_root_height": 1.0118794885270526,
+        "final_height": 1.0433996507565633
+      }
+    ],
+    "summary": {
+      "displacement": {
+        "mean": 0.04668766968891567,
+        "std": 0.00020018158709501801,
+        "min": 0.04632258713091943,
+        "max": 0.04703216387933757
+      },
+      "activation_volume": {
+        "mean": 26.669858551025392,
+        "std": 0.1907651028738268,
+        "min": 26.283143997192383,
+        "max": 26.9921817779541
+      },
+      "action_coordination": {
+        "mean": 0.05632752038281312,
+        "std": 0.0009391387862010694,
+        "min": 0.054485762790796734,
+        "max": 0.058059231313071
+      },
+      "state_coverage": {
+        "mean": 0.00028099726629120036,
+        "std": 4.026986396586421e-06,
+        "min": 0.00027263023828547447,
+        "max": 0.00028932857395927734
+      },
+      "upright_fraction": {
+        "mean": 1.0,
+        "std": 0.0,
+        "min": 1.0,
+        "max": 1.0
+      },
+      "mean_root_height": {
+        "mean": 1.0124927829335086,
+        "std": 0.00043541391080108006,
+        "min": 1.0118606408370805,
+        "max": 1.0135557208322963
+      },
+      "final_height": {
+        "mean": 1.04414598267302,
+        "std": 0.0004802488938546677,
+        "min": 1.0432192455939175,
+        "max": 1.0449708433384763
+      }
+    }
+  },
+  "DEP": {
+    "episodes": [
+      {
+        "displacement": 0.04931594532526822,
+        "activation_volume": 43.90513229370117,
+        "action_coordination": 0.369015136395847,
+        "state_coverage": 0.00030071982423324455,
+        "upright_fraction": 1.0,
+        "mean_root_height": 1.0117555961720315,
+        "final_height": 1.0457966537438819
+      },
+      {
+        "displacement": 0.04931594532526822,
+        "activation_volume": 43.90513229370117,
+        "action_coordination": 0.369015136395847,
+        "state_coverage": 0.00030071982423324455,
+        "upright_fraction": 1.0,
+        "mean_root_height": 1.0117555961720315,
+        "final_height": 1.0457966537438819
+      },
+      {
+        "displacement": 0.04931594532526822,
+        "activation_volume": 43.90513229370117,
+        "action_coordination": 0.369015136395847,
+        "state_coverage": 0.00030071982423324455,
+        "upright_fraction": 1.0,
+        "mean_root_height": 1.0117555961720315,
+        "final_height": 1.0457966537438819
+      },
+      {
+        "displacement": 0.04931594532526822,
+        "activation_volume": 43.90513229370117,
+        "action_coordination": 0.369015136395847,
+        "state_coverage": 0.00030071982423324455,
+        "upright_fraction": 1.0,
+        "mean_root_height": 1.0117555961720315,
+        "final_height": 1.0457966537438819
+      },
+      {
+        "displacement": 0.04931594532526822,
+        "activation_volume": 43.90513229370117,
+        "action_coordination": 0.369015136395847,
+        "state_coverage": 0.00030071982423324455,
+        "upright_fraction": 1.0,
+        "mean_root_height": 1.0117555961720315,
+        "final_height": 1.0457966537438819
+      },
+      {
+        "displacement": 0.04931594532526822,
+        "activation_volume": 43.90513229370117,
+        "action_coordination": 0.369015136395847,
+        "state_coverage": 0.00030071982423324455,
+        "upright_fraction": 1.0,
+        "mean_root_height": 1.0117555961720315,
+        "final_height": 1.0457966537438819
+      },
+      {
+        "displacement": 0.04931594532526822,
+        "activation_volume": 43.90513229370117,
+        "action_coordination": 0.369015136395847,
+        "state_coverage": 0.00030071982423324455,
+        "upright_fraction": 1.0,
+        "mean_root_height": 1.0117555961720315,
+        "final_height": 1.0457966537438819
+      },
+      {
+        "displacement": 0.04931594532526822,
+        "activation_volume": 43.90513229370117,
+        "action_coordination": 0.369015136395847,
+        "state_coverage": 0.00030071982423324455,
+        "upright_fraction": 1.0,
+        "mean_root_height": 1.0117555961720315,
+        "final_height": 1.0457966537438819
+      },
+      {
+        "displacement": 0.04931594532526822,
+        "activation_volume": 43.90513229370117,
+        "action_coordination": 0.369015136395847,
+        "state_coverage": 0.00030071982423324455,
+        "upright_fraction": 1.0,
+        "mean_root_height": 1.0117555961720315,
+        "final_height": 1.0457966537438819
+      },
+      {
+        "displacement": 0.04931594532526822,
+        "activation_volume": 43.90513229370117,
+        "action_coordination": 0.369015136395847,
+        "state_coverage": 0.00030071982423324455,
+        "upright_fraction": 1.0,
+        "mean_root_height": 1.0117555961720315,
+        "final_height": 1.0457966537438819
+      },
+      {
+        "displacement": 0.04931594532526822,
+        "activation_volume": 43.90513229370117,
+        "action_coordination": 0.369015136395847,
+        "state_coverage": 0.00030071982423324455,
+        "upright_fraction": 1.0,
+        "mean_root_height": 1.0117555961720315,
+        "final_height": 1.0457966537438819
+      },
+      {
+        "displacement": 0.04931594532526822,
+        "activation_volume": 43.90513229370117,
+        "action_coordination": 0.369015136395847,
+        "state_coverage": 0.00030071982423324455,
+        "upright_fraction": 1.0,
+        "mean_root_height": 1.0117555961720315,
+        "final_height": 1.0457966537438819
+      },
+      {
+        "displacement": 0.04931594532526822,
+        "activation_volume": 43.90513229370117,
+        "action_coordination": 0.369015136395847,
+        "state_coverage": 0.00030071982423324455,
+        "upright_fraction": 1.0,
+        "mean_root_height": 1.0117555961720315,
+        "final_height": 1.0457966537438819
+      },
+      {
+        "displacement": 0.04931594532526822,
+        "activation_volume": 43.90513229370117,
+        "action_coordination": 0.369015136395847,
+        "state_coverage": 0.00030071982423324455,
+        "upright_fraction": 1.0,
+        "mean_root_height": 1.0117555961720315,
+        "final_height": 1.0457966537438819
+      },
+      {
+        "displacement": 0.04931594532526822,
+        "activation_volume": 43.90513229370117,
+        "action_coordination": 0.369015136395847,
+        "state_coverage": 0.00030071982423324455,
+        "upright_fraction": 1.0,
+        "mean_root_height": 1.0117555961720315,
+        "final_height": 1.0457966537438819
+      },
+      {
+        "displacement": 0.04931594532526822,
+        "activation_volume": 43.90513229370117,
+        "action_coordination": 0.369015136395847,
+        "state_coverage": 0.00030071982423324455,
+        "upright_fraction": 1.0,
+        "mean_root_height": 1.0117555961720315,
+        "final_height": 1.0457966537438819
+      },
+      {
+        "displacement": 0.04931594532526822,
+        "activation_volume": 43.90513229370117,
+        "action_coordination": 0.369015136395847,
+        "state_coverage": 0.00030071982423324455,
+        "upright_fraction": 1.0,
+        "mean_root_height": 1.0117555961720315,
+        "final_height": 1.0457966537438819
+      },
+      {
+        "displacement": 0.04931594532526822,
+        "activation_volume": 43.90513229370117,
+        "action_coordination": 0.369015136395847,
+        "state_coverage": 0.00030071982423324455,
+        "upright_fraction": 1.0,
+        "mean_root_height": 1.0117555961720315,
+        "final_height": 1.0457966537438819
+      },
+      {
+        "displacement": 0.04931594532526822,
+        "activation_volume": 43.90513229370117,
+        "action_coordination": 0.369015136395847,
+        "state_coverage": 0.00030071982423324455,
+        "upright_fraction": 1.0,
+        "mean_root_height": 1.0117555961720315,
+        "final_height": 1.0457966537438819
+      },
+      {
+        "displacement": 0.04931594532526822,
+        "activation_volume": 43.90513229370117,
+        "action_coordination": 0.369015136395847,
+        "state_coverage": 0.00030071982423324455,
+        "upright_fraction": 1.0,
+        "mean_root_height": 1.0117555961720315,
+        "final_height": 1.0457966537438819
+      }
+    ],
+    "summary": {
+      "displacement": {
+        "mean": 0.049315945325268215,
+        "std": 6.938893903907228e-18,
+        "min": 0.04931594532526822,
+        "max": 0.04931594532526822
+      },
+      "activation_volume": {
+        "mean": 43.90513229370117,
+        "std": 0.0,
+        "min": 43.90513229370117,
+        "max": 43.90513229370117
+      },
+      "action_coordination": {
+        "mean": 0.36901513639584693,
+        "std": 5.551115123125783e-17,
+        "min": 0.369015136395847,
+        "max": 0.369015136395847
+      },
+      "state_coverage": {
+        "mean": 0.00030071982423324455,
+        "std": 0.0,
+        "min": 0.00030071982423324455,
+        "max": 0.00030071982423324455
+      },
+      "upright_fraction": {
+        "mean": 1.0,
+        "std": 0.0,
+        "min": 1.0,
+        "max": 1.0
+      },
+      "mean_root_height": {
+        "mean": 1.0117555961720313,
+        "std": 2.220446049250313e-16,
+        "min": 1.0117555961720315,
+        "max": 1.0117555961720315
+      },
+      "final_height": {
+        "mean": 1.0457966537438819,
+        "std": 0.0,
+        "min": 1.0457966537438819,
+        "max": 1.0457966537438819
+      }
+    }
+  },
+  "comparison": {
+    "displacement": {
+      "random": 0.04668766968891567,
+      "dep": 0.049315945325268215,
+      "change_pct": 5.629485587661569
+    },
+    "activation_volume": {
+      "random": 26.669858551025392,
+      "dep": 43.90513229370117,
+      "change_pct": 64.62454125769304
+    },
+    "action_coordination": {
+      "random": 0.05632752038281312,
+      "dep": 0.36901513639584693,
+      "change_pct": 555.1240563901022
+    },
+    "state_coverage": {
+      "random": 0.00028099726629120036,
+      "dep": 0.00030071982423324455,
+      "change_pct": 7.018772176098505
+    },
+    "upright_fraction": {
+      "random": 1.0,
+      "dep": 1.0,
+      "change_pct": 0.0
+    },
+    "mean_root_height": {
+      "random": 1.0124927829335086,
+      "dep": 1.0117555961720313,
+      "change_pct": -0.07280908801557291
+    },
+    "final_height": {
+      "random": 1.04414598267302,
+      "dep": 1.0457966537438819,
+      "change_pct": 0.1580881503404526
+    }
+  },
+  "config": {
+    "xml_path": "data/xml/legs/myolegs.xml",
+    "n_episodes": 20,
+    "episode_length": 200,
+    "n_muscles": 80,
+    "seed": 42
+  }
+}

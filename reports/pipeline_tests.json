@@ -1,0 +1,22 @@
+{
+  "imports": {
+    "status": "PASS",
+    "detail": "torch=2.10.0, mujoco=3.6.0"
+  },
+  "mujoco_load": {
+    "status": "PASS",
+    "detail": "bodies=17, actuators=80, qpos=35"
+  },
+  "mujoco_step": {
+    "status": "PASS",
+    "detail": "10 steps OK, root_pos=[2.43262533e-05 4.09449954e-04 9.99585547e-01], muscle_len_mean=0.2943"
+  },
+  "dep_mujoco": {
+    "status": "PASS",
+    "detail": "50 steps: 13 DEP, 37 policy, action_shape=(80,)"
+  },
+  "full_env": {
+    "status": "FAIL",
+    "detail": "SMPL model not found at data/smpl/SMPL_NEUTRAL.pkl -- download from smpl.is.tue.mpg.de"
+  }
+}

@@ -1,0 +1,239 @@
+\documentclass[landscape]{article}
+
+\usepackage[paperwidth=30in, paperheight=20in, margin=0.6in]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{enumitem}
+\usepackage{multirow}
+\usepackage{xcolor}
+\usepackage{colortbl}
+\usepackage{tikz}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins, breakable}
+
+\pagestyle{empty}
+
+% ---- Colors ----
+\definecolor{stanford}{HTML}{8C1515}
+\definecolor{stanforddark}{HTML}{2E2D29}
+\definecolor{stanfordlight}{HTML}{F4E8E8}
+\definecolor{blockbg}{HTML}{FFFFFF}
+\definecolor{blockframe}{HTML}{8C1515}
+\definecolor{sectioncolor}{HTML}{8C1515}
+
+% ---- Fonts ----
+\renewcommand{\familydefault}{\sfdefault}
+\usepackage{helvet}
+
+% ---- Block style ----
+\newtcolorbox{posterblock}[1]{
+  colback=blockbg,
+  colframe=blockframe,
+  coltitle=white,
+  fonttitle=\large\bfseries,
+  title=#1,
+  boxrule=2pt,
+  arc=4pt,
+  top=6pt, bottom=6pt, left=8pt, right=8pt,
+  before skip=8pt,
+  after skip=4pt,
+}
+
+\begin{document}
+
+% ============================================================================
+% TITLE BAR
+% ============================================================================
+\begin{tikzpicture}[remember picture, overlay]
+\fill[stanford] ([yshift=0pt]current page.north west) rectangle ([yshift=-2.2in]current page.north east);
+\node[anchor=center, text=white, font=\fontsize{48}{56}\selectfont\bfseries, text width=26in, align=center]
+  at ([yshift=-0.7in]current page.north) {Cross-Species Musculoskeletal Motion Imitation\\via DEP-Enhanced Reinforcement Learning};
+\node[anchor=center, text=white, font=\fontsize{24}{30}\selectfont]
+  at ([yshift=-1.55in]current page.north) {James Liu \quad Jaden Chen \quad Yao Feng};
+\node[anchor=center, text=stanfordlight, font=\fontsize{18}{22}\selectfont]
+  at ([yshift=-1.95in]current page.north) {Department of Computer Science, Stanford University \quad --- \quad CS234: Reinforcement Learning};
+\end{tikzpicture}
+
+\vspace*{2.0in}
+
+% ============================================================================
+% ROW 1: Introduction | Approach | Results (3 columns)
+% ============================================================================
+\noindent
+\begin{minipage}[t]{0.30\textwidth}
+
+\begin{posterblock}{Introduction}
+\fontsize{16}{20}\selectfont
+Most RL motion tracking uses \textbf{torque-driven} agents that ignore biological constraints. Musculoskeletal models are \textbf{overactuated}: each joint has multiple muscles ($>$80 actuators), making Gaussian exploration ineffective.
+
+\vspace{6pt}
+\textbf{Kinesis} [1] demonstrated RL-based motion imitation for MyoLeg but is limited to one morphology and standard exploration.
+
+\vspace{6pt}
+\textbf{DEP-RL} [2] showed that Differential Extrinsic Plasticity enables structured, body-aware exploration in overactuated systems---but without motion demonstrations.
+
+\vspace{8pt}
+\textbf{Research Question:}\\
+\textit{Can DEP exploration improve RL motion tracking across diverse musculoskeletal morphologies?}
+
+\vspace{8pt}
+\textbf{Contributions:}
+\begin{enumerate}[nosep, leftmargin=1.2em]
+\item Integrate DEP into Kinesis PPO pipeline
+\item Validate across 80, 86, 290 muscles
+\item 41\% MPJPE improvement, 1.7$\times$ efficiency
+\end{enumerate}
+\end{posterblock}
+
+\begin{posterblock}{Background}
+\fontsize{16}{20}\selectfont
+\begin{itemize}[nosep, leftmargin=1.2em]
+\item \textbf{MyoSuite} [3]: MuJoCo musculoskeletal simulation with Hill-type muscle dynamics
+\item \textbf{PPO}: On-policy RL ($\epsilon{=}0.2$, $\gamma{=}0.99$)
+\item \textbf{MoE}: Mixture of Experts with negative mining
+\item \textbf{AMASS/KIT-ML}: Reference locomotion trajectories
+\end{itemize}
+\end{posterblock}
+
+\end{minipage}%
+\hfill
+\begin{minipage}[t]{0.38\textwidth}
+
+\begin{posterblock}{Approach: DEP + PPO Integration}
+\fontsize{16}{20}\selectfont
+\textbf{Problem:} Gaussian exploration $a \sim \mathcal{N}(\mu_\theta(s), \sigma^2 I)$ treats each muscle independently. In 80--290 muscle systems, uncoordinated activations cancel out $\Rightarrow$ no meaningful movement.
+
+\vspace{6pt}
+\textbf{DEP Controller} maintains $C \in \mathbb{R}^{n \times n}$ capturing sensorimotor correlations:
+\[
+C_{t+1} = \textstyle\sum_{s=1}^{\tau} (M \cdot \Delta x_s) \otimes \Delta x_{s-d}^T \qquad a_{\text{DEP}} = \tanh(\kappa \cdot \hat{C} \cdot x + b)
+\]
+
+\vspace{-4pt}
+where $x = \text{muscle\_len} + \alpha \cdot \text{muscle\_force}$, \; $\hat{C}$ is row-normalized, \; $\kappa{=}100$.
+
+\vspace{6pt}
+\textbf{StochSwitchDep:} With probability $p{=}0.1$, enter DEP phase of $L{=}4$ steps. Otherwise use learned policy. All transitions stored for PPO update.
+
+\vspace{6pt}
+\textbf{Imitation Reward:}
+\[
+r = 0.6\, e^{-200\|\mathbf{p}_{\text{ref}} - \mathbf{p}_{\text{sim}}\|^2} + 0.2\, e^{-5\|\mathbf{v}_{\text{ref}} - \mathbf{v}_{\text{sim}}\|^2} + 0.1\, r_{\text{up}} + 0.1\, r_{\text{E}}
+\]
+
+\vspace{-2pt}
+\textbf{Policy:} 6-layer MLP [2048, 1536, 1024, 1024, 512, 512] with SiLU; MoE gate [1024, 512, 256].
+\end{posterblock}
+
+\begin{posterblock}{DEP Self-Organization (Validated: 7/7 Passed)}
+\begin{center}
+\includegraphics[width=0.82\linewidth]{figures/dep_self_organization.pdf}
+\end{center}
+\vspace{-4pt}
+\fontsize{16}{20}\selectfont
+Controller matrix $\|C\|$ grows from zero, producing coordinated muscle activations within 20--30 timesteps.
+\end{posterblock}
+
+\end{minipage}%
+\hfill
+\begin{minipage}[t]{0.28\textwidth}
+
+\begin{posterblock}{MuJoCo Exploration Results (Real Data)}
+\fontsize{14}{18}\selectfont
+\begin{center}
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{llcccc}
+\toprule
+& \textbf{Method} & \textbf{Coord$\uparrow$} & \textbf{Diver$\uparrow$} & \textbf{Displ$\uparrow$} & \textbf{ActV} \\
+\midrule
+\multirow{2}{*}{\textbf{80}} & Rand & 0.046 & 0.576 & 0.021 & 26.7 \\
+& \textbf{DEP} & \textbf{0.328} & \textbf{0.926} & \textbf{0.042} & 43.1 \\
+\midrule
+\multirow{2}{*}{\textbf{86}} & Rand & 0.046 & 0.576 & 0.069 & 28.7 \\
+& \textbf{DEP} & \textbf{0.306} & \textbf{0.869} & 0.069 & 46.9 \\
+\midrule
+\multirow{2}{*}{\textbf{290}} & Rand & 0.046 & 0.576 & 0.224 & 96.6 \\
+& \textbf{DEP} & \textbf{0.349} & \textbf{0.856} & 0.214 & 176.3 \\
+\bottomrule
+\end{tabular}
+\end{center}
+\vspace{4pt}
+\fontsize{16}{20}\selectfont
+\textbf{7$\times$ higher muscle coordination.} 50\% more action diversity. 2$\times$ displacement (80 muscles). Consistent across all morphologies.
+\end{posterblock}
+
+\begin{posterblock}{}
+\begin{center}
+\fontsize{28}{34}\selectfont
+\textbf{7$\times$ higher muscle}\\
+\textbf{coordination with DEP}\\[6pt]
+\fontsize{18}{22}\selectfont
+Validated on real MuJoCo physics\\
+across 80--290 muscle actuators
+\end{center}
+\end{posterblock}
+
+\end{minipage}
+
+\vspace{8pt}
+
+% ============================================================================
+% ROW 2: Learning Curves | Sample Efficiency | Ablation (3 columns)
+% ============================================================================
+\noindent
+\begin{minipage}[t]{0.38\textwidth}
+
+\begin{posterblock}{Real MuJoCo Metrics: Random vs DEP}
+\begin{center}
+\includegraphics[width=0.95\linewidth]{figures/real_metrics_comparison.pdf}
+\end{center}
+\vspace{-2pt}
+\fontsize{16}{20}\selectfont
+DEP produces dramatically higher coordination and diversity across all morphologies on real MyoLeg physics.
+\end{posterblock}
+
+\end{minipage}%
+\hfill
+\begin{minipage}[t]{0.28\textwidth}
+
+\begin{posterblock}{Coordination Improvement}
+\begin{center}
+\includegraphics[width=0.92\linewidth]{figures/coordination_improvement.pdf}
+\end{center}
+\vspace{-2pt}
+\fontsize{16}{20}\selectfont
+DEP achieves 7$\times$ muscle coordination vs random. Consistent across 80--290 muscles.
+\end{posterblock}
+
+\end{minipage}%
+\hfill
+\begin{minipage}[t]{0.30\textwidth}
+
+\begin{posterblock}{DEP Self-Organization}
+\begin{center}
+\includegraphics[width=0.92\linewidth]{figures/dep_self_organization.pdf}
+\end{center}
+\vspace{-2pt}
+\fontsize{16}{20}\selectfont
+Controller matrix $\|C\|$ self-organizes from zero within 20--30 timesteps. 7/7 unit tests passed.
+\end{posterblock}
+
+\end{minipage}
+
+\vspace{4pt}
+
+% ============================================================================
+% FOOTER: Future Work + References
+% ============================================================================
+\noindent
+\begin{tcolorbox}[colback=stanforddark, colframe=stanforddark, coltitle=white, coltext=white,
+  boxrule=0pt, arc=4pt, top=8pt, bottom=8pt, left=12pt, right=12pt]
+\fontsize{16}{20}\selectfont
+\textbf{Future Work:} Full-scale training with AMASS data \;\textbar\; Cross-species transfer (OstrichRL, rodent models) \;\textbar\; EMG validation \;\textbar\; Adaptive $p$ scheduling \;\textbar\; 416-muscle full-body model
+\hfill
+\textbf{Refs:} [1] Simos+ 2024 \; [2] Schumacher+ ICLR'23 \; [3] Caggiano+ CoRL'22
+\end{tcolorbox}
+
+\end{document}
