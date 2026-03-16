@@ -17,7 +17,7 @@
 
 \setlength{\columnsep}{0.25in}
 
-\title{Cross-Species Musculoskeletal Motion Imitation\\via DEP-Enhanced Reinforcement Learning}
+\title{DEP-Enhanced Exploration for\\Musculoskeletal Motion Imitation}
 
 \author{
   James Liu \quad Jaden Chen \\
@@ -97,7 +97,7 @@ where $r_\text{pos} = \exp(-k_\text{pos} \| \mathbf{p}_\text{ref} - \mathbf{p}_\
 
 \subsection{DEP Exploration Prior}
 
-The key limitation of standard PPO in high-dimensional muscle spaces is that diagonal Gaussian exploration $a \sim \mathcal{N}(\mu_\theta(s), \sigma^2 I)$ treats each muscle independently. In overactuated systems, this produces uncoordinated activations that rarely move the body meaningfully, leading to poor gradient signal.
+The key limitation of standard PPO in high-dimensional muscle spaces is that diagonal Gaussian exploration $a \sim \mathcal{N}(\mu_\theta(s), \sigma^2 I)$ treats each muscle independently. Because multiple muscles act on each joint, the net torque $\tau_j = \sum_i r_i f_i$ is a sum over muscle forces $f_i$ with moment arms $r_i$; independent random activations tend to cancel, producing negligible net movement and poor gradient signal.
 
 DEP addresses this by maintaining a controller matrix $C \in \mathbb{R}^{n \times n}$ (where $n$ is the number of muscles) that captures sensorimotor correlations:
 \begin{equation}
@@ -139,7 +139,11 @@ We integrate DEP with PPO using stochastic switching (Algorithm~\ref{alg:stochsw
 
 \subsection{Policy Architecture}
 
-We use the Kinesis MoE architecture: a gating network selects among frozen expert policies trained via negative mining. Each expert is a 6-layer MLP $[2048, 1536, 1024, 1024, 512, 512]$ with SiLU activations. The MoE gate is a 3-layer MLP $[1024, 512, 256]$. PPO hyperparameters: $\epsilon_\text{clip}=0.2$, $\gamma=0.99$, $\lambda_\text{GAE}=0.95$, policy LR $= 5 \times 10^{-5}$, value LR $= 3 \times 10^{-4}$.
+We use the Kinesis MoE architecture, where the composite policy is:
+\begin{equation}
+\pi(a \mid s) = \textstyle\sum_k g_k(s)\,\pi_k(a \mid s)
+\end{equation}
+Gating weights $g_k(s)$ route states to specialized expert sub-policies $\pi_k$, each trained on a motion subset discovered via negative mining. Each expert is a 6-layer MLP $[2048, 1536, 1024, 1024, 512, 512]$ with SiLU activations. The gate is a 3-layer MLP $[1024, 512, 256]$. Despite MoE's expressiveness, exploration remains the bottleneck in high-dimensional muscle spaces. PPO hyperparameters: $\epsilon_\text{clip}=0.2$, $\gamma=0.99$, $\lambda_\text{GAE}=0.95$, policy LR $= 5 \times 10^{-5}$, value LR $= 3 \times 10^{-4}$.
 
 \subsection{Evaluation Metrics}
 
