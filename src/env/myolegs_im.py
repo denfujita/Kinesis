@@ -154,9 +154,13 @@ class MyoLegsIm(MyoLegsTask):
 
         Sets:
             - `mpjpe` (list): Mean per-joint position error metric.
+            - `joint_angle_rmse` (list): RMSE between sim and reference joint angles.
+            - `activation_volume` (list): Sum of squared muscle activations per step.
             - `frame_coverage` (float): Tracks the percentage of frames covered.
         """
         self.mpjpe = []
+        self.joint_angle_rmse = []
+        self.activation_volume = []
         self.frame_coverage = 0
 
     def initialize_biomechanical_recording(self):
@@ -426,8 +430,9 @@ class MyoLegsIm(MyoLegsTask):
         """
         Resets evaluation metrics for motion imitation performance.
         """
-        self.mjpe = []
-        self.mjve = []
+        self.mpjpe = []
+        self.joint_angle_rmse = []
+        self.activation_volume = []
 
     def delineate_biomechanical_recording(self) -> None:
         """
@@ -533,6 +538,14 @@ class MyoLegsIm(MyoLegsTask):
             - `self.frame_coverage`: Ratio of completed frames to total motion length.
         """
         self.mpjpe_value = np.array(self.mpjpe).mean()
+        self.joint_angle_rmse_value = (
+            np.array(self.joint_angle_rmse).mean() if self.joint_angle_rmse else np.nan
+        )
+        self.activation_volume_value = (
+            np.array(self.activation_volume).mean()
+            if self.activation_volume
+            else np.nan
+        )
         if terminated:
             self.frame_coverage = sim_time / self.motion_lib.get_motion_length(self._sampled_motion_ids)
         else:
@@ -770,25 +783,43 @@ class MyoLegsIm(MyoLegsTask):
         self.muscle_forces.append(self.get_muscle_force().copy())
         self.muscle_controls.append(self.mj_data.ctrl.copy())
 
-    def record_evaluation_metrics(self, 
-                                  body_pos: np.ndarray, 
-                                  ref_pos: np.ndarray, 
-                                  body_vel: np.ndarray, 
-                                  ref_vel: np.ndarray
-                                  ) -> None:
+    def record_evaluation_metrics(
+        self,
+        body_pos: np.ndarray,
+        ref_pos: np.ndarray,
+        body_vel: np.ndarray,
+        ref_vel: np.ndarray,
+        ref_dict: Optional[dict] = None,
+    ) -> None:
         """
-        Records evaluation metrics (MPJPE) for the current simulation step.
+        Records evaluation metrics (MPJPE, joint angle RMSE, activation volume) for the current simulation step.
 
         Args:
             body_pos (np.ndarray): Current body positions.
             ref_pos (np.ndarray): Reference body positions.
             body_vel (np.ndarray): Current body velocities.
             ref_vel (np.ndarray): Reference body velocities.
+            ref_dict (dict, optional): Reference motion state for joint angle RMSE. Must contain 'qpos'.
 
         Updates:
             - `self.mpjpe`: Appends the mean position error for the current step.
+            - `self.joint_angle_rmse`: Appends RMSE between sim and reference joint angles.
+            - `self.activation_volume`: Appends sum of squared muscle activations.
         """
         self.mpjpe.append(np.linalg.norm(body_pos - ref_pos, axis=-1).mean())
+
+        if ref_dict is not None and "qpos" in ref_dict:
+            sim_qpos = self.get_qpos()
+            ref_qpos = ref_dict["qpos"].flatten()
+            min_len = min(len(sim_qpos), len(ref_qpos))
+            if min_len > 7:
+                sim_dof = sim_qpos[7:min_len]
+                ref_dof = ref_qpos[7:min_len]
+                rmse = np.sqrt(np.mean((sim_dof - ref_dof) ** 2))
+                self.joint_angle_rmse.append(rmse)
+
+        activation = np.nan_to_num(self.mj_data.ctrl.copy())
+        self.activation_volume.append(np.sum(activation**2))
 
     def compute_reward(self, action: Optional[np.ndarray] = None) -> float:
         """
@@ -846,7 +877,13 @@ class MyoLegsIm(MyoLegsTask):
         self.reward_info["upright_reward"] = upright_reward
         self.reward_info["energy_reward"] = energy_reward
 
-        self.record_evaluation_metrics(body_pos_subset, ref_pos_subset, body_vel_subset, ref_body_vel_subset)
+        self.record_evaluation_metrics(
+            body_pos_subset,
+            ref_pos_subset,
+            body_vel_subset,
+            ref_body_vel_subset,
+            ref_dict=ref_dict,
+        )
 
         return reward
     
@@ -996,6 +1033,11 @@ class MyoLegsIm(MyoLegsTask):
             terminated, truncated = False, False
         info = {}
         info.update(self.reward_info)
+        if terminated or truncated:
+            info["mpjpe"] = getattr(self, "mpjpe_value", np.nan)
+            info["joint_angle_rmse"] = getattr(self, "joint_angle_rmse_value", np.nan)
+            info["activation_volume"] = getattr(self, "activation_volume_value", np.nan)
+            info["frame_coverage"] = getattr(self, "frame_coverage", 0.0)
 
         return obs, reward, terminated, truncated, info
 

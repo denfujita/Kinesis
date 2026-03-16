@@ -1,0 +1,26 @@
+{
+  "imports": {
+    "status": "PASS",
+    "detail": "torch=2.10.0, mujoco=3.6.0"
+  },
+  "mujoco_load": {
+    "status": "PASS",
+    "detail": "bodies=17, actuators=80, qpos=35"
+  },
+  "mujoco_step": {
+    "status": "PASS",
+    "detail": "10 steps OK, root_pos=[1.86221674e-05 4.42717410e-04 9.99576772e-01], muscle_len_mean=0.2943"
+  },
+  "dep_mujoco": {
+    "status": "PASS",
+    "detail": "50 steps: 4 DEP, 46 policy, action_shape=(80,)"
+  },
+  "full_env": {
+    "status": "PASS",
+    "detail": "obs=(469,), reward=0.3467, nu=80"
+  },
+  "single_epoch": {
+    "status": "ERROR",
+    "detail": "[Errno 2] No such file or directory: '/dev/shm'"
+  }
+}

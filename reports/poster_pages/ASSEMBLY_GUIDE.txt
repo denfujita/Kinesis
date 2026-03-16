@@ -1,0 +1,19 @@
+POSTER ASSEMBLY GUIDE
+==================================================
+
+Poster: 30.0" x 20.0" landscape
+Printed on: 9 A4 landscape pages
+Grid: 3 columns x 3 rows
+Overlap: 0.5" per shared edge
+
+Arrangement (looking at poster from front):
+
+  [Page  1]  [Page  2]  [Page  3]
+  [Page  4]  [Page  5]  [Page  6]
+  [Page  7]  [Page  8]  [Page  9]
+
+Instructions:
+1. Print poster_tiled.pdf on A4 paper, LANDSCAPE orientation.
+2. Lay out pages in the grid above.
+3. Overlap shared edges by 0.5" and tape from behind.
+4. Trim excess white edges if needed.

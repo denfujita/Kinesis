@@ -1,0 +1,32 @@
+# DEP exploration configuration for Kinesis PPO
+# Integrates DEP-RL exploration prior for overactuated musculoskeletal systems
+
+use_dep_exploration: False
+
+# dep_mix: 0=none, 2=DetSwitch, 3=StochSwitch (paper default)
+dep_mix: 3
+
+# StochSwitch: probability of starting DEP intervention phase
+dep_intervention_proba: 0.1
+
+# DetSwitch/StochSwitch: steps to use DEP when in intervention phase
+dep_intervention_length: 4
+
+# DetSwitch: steps to use RL policy between DEP phases
+dep_rl_length: 1
+
+# muscle_states = muscle_len + dep_alpha * muscle_force
+dep_alpha: 0.01
+
+# DEP controller parameters (from deprl default_agents.json)
+dep_params:
+  kappa: 100.0
+  tau: 20
+  bias_rate: 0.00002
+  time_dist: 5
+  normalization: "independent"
+  s4avg: 2
+  buffer_size: 200
+  regularization: 32
+  with_learning: true
+  q_norm_selector: "l2"

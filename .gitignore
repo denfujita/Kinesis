@@ -1,0 +1,5 @@
+__pycache__/
+*.pyc
+tmp/
+data/smpl/SMPL_NEUTRAL.pkl
+data/kit_train_motion_dict.pkl

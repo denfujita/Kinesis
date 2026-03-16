@@ -75,8 +75,7 @@ class AgentPPO(AgentPG):
         Returns:
             dict: Dictionary containing training metrics.
         """
-        print("Updating policy...")
-        # Compute log proabilities of the actions under the current policy
+        # Compute log probabilities of the actions under the current policy
         with to_test(*self.update_modules):
             with torch.no_grad():
                 if isinstance(self.policy_net, PolicyMOEWithPrev):

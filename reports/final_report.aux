@@ -1,0 +1,79 @@
+\relax 
+\providecommand\hyper@newdestlabel[2]{}
+\providecommand\HyField@AuxAddToFields[1]{}
+\providecommand\HyField@AuxAddToCoFields[2]{}
+\citation{peng2018deepmimic}
+\citation{kinesis2024}
+\citation{deprl2023}
+\citation{der2015novel}
+\citation{peng2018deepmimic}
+\citation{peng2021amp}
+\@writefile{toc}{\contentsline {section}{\numberline {1}Introduction}{1}{section.1}\protected@file@percent }
+\newlabel{sec:intro}{{1}{1}{Introduction}{section.1}{}}
+\citation{myosuite}
+\citation{myodex}
+\citation{kinesis2024}
+\citation{deprl2023}
+\citation{der2015novel}
+\@writefile{toc}{\contentsline {section}{\numberline {2}Background and Related Work}{2}{section.2}\protected@file@percent }
+\newlabel{sec:related}{{2}{2}{Background and Related Work}{section.2}{}}
+\@writefile{toc}{\contentsline {paragraph}{Physics-based motion imitation.}{2}{section*.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Musculoskeletal simulation.}{2}{section*.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Kinesis.}{2}{section*.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{DEP-RL.}{2}{section*.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {3}Approach}{2}{section.3}\protected@file@percent }
+\newlabel{sec:approach}{{3}{2}{Approach}{section.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Problem Formulation}{2}{subsection.3.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Imitation Reward}{2}{subsection.3.2}\protected@file@percent }
+\newlabel{sec:reward}{{3.2}{2}{Imitation Reward}{subsection.3.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}DEP Exploration Prior}{2}{subsection.3.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.4}Stochastic DEP-Policy Switching}{2}{subsection.3.4}\protected@file@percent }
+\@writefile{loa}{\contentsline {algorithm}{\numberline {1}{\ignorespaces StochSwitchDep Rollout}}{3}{algorithm.1}\protected@file@percent }
+\providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
+\newlabel{alg:stochswitch}{{1}{3}{StochSwitchDep Rollout}{algorithm.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.5}Policy Architecture}{3}{subsection.3.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.6}Evaluation Metrics}{3}{subsection.3.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4}Experiments}{3}{section.4}\protected@file@percent }
+\newlabel{sec:experiments}{{4}{3}{Experiments}{section.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Experimental Setup}{3}{subsection.4.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Models.}{3}{section*.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Data.}{3}{section*.7}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{DEP parameters.}{3}{section*.8}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{DEP validation.}{3}{section*.9}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Exploration Quality: MuJoCo Physics Experiments}{3}{subsection.4.2}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces MuJoCo exploration experiment: Random vs.\ DEP on real musculoskeletal physics. \textbf  {Action coordination} measures mean absolute cross-correlation between muscle channels. \textbf  {Action diversity} measures per-muscle activation std. \textbf  {Displacement} is root translation distance. Results averaged over 15 episodes of 300 steps.}}{4}{table.caption.10}\protected@file@percent }
+\newlabel{tab:mujoco}{{1}{4}{MuJoCo exploration experiment: Random vs.\ DEP on real musculoskeletal physics. \textbf {Action coordination} measures mean absolute cross-correlation between muscle channels. \textbf {Action diversity} measures per-muscle activation std. \textbf {Displacement} is root translation distance. Results averaged over 15 episodes of 300 steps}{table.caption.10}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces MuJoCo experiment results: Random (red) vs.\ DEP (blue) across three morphologies. DEP produces dramatically higher action coordination while maintaining action diversity across all model scales.}}{4}{figure.caption.11}\protected@file@percent }
+\newlabel{fig:mujoco_comparison}{{1}{4}{MuJoCo experiment results: Random (red) vs.\ DEP (blue) across three morphologies. DEP produces dramatically higher action coordination while maintaining action diversity across all model scales}{figure.caption.11}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces DEP coordination improvement ratio over random exploration. DEP achieves 6--8$\times $ higher muscle coordination consistently across morphologies.}}{4}{figure.caption.12}\protected@file@percent }
+\newlabel{fig:coord_ratio}{{2}{4}{DEP coordination improvement ratio over random exploration. DEP achieves 6--8$\times $ higher muscle coordination consistently across morphologies}{figure.caption.12}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Training Results}{4}{subsection.4.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4}DEP Self-Organization}{4}{subsection.4.4}\protected@file@percent }
+\bibstyle{plainnat}
+\bibcite{kinesis2024}{{1}{2024}{{Simos et~al.}}{{}}}
+\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Motion imitation results: PPO baseline vs.\ PPO+DEP across morphologies after 500 training epochs. Metrics averaged over last 20 epochs. $\downarrow $ = lower is better, $\uparrow $ = higher is better.}}{5}{table.caption.13}\protected@file@percent }
+\newlabel{tab:main}{{2}{5}{Motion imitation results: PPO baseline vs.\ PPO+DEP across morphologies after 500 training epochs. Metrics averaged over last 20 epochs. $\downarrow $ = lower is better, $\uparrow $ = higher is better}{table.caption.13}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces DEP self-organization: controller matrix norm $\|C\|$ (left) and action standard deviation (right) over 100 timesteps. DEP rapidly learns sensorimotor correlations and produces diverse, coordinated actions.}}{5}{figure.caption.14}\protected@file@percent }
+\newlabel{fig:selforg}{{3}{5}{DEP self-organization: controller matrix norm $\|C\|$ (left) and action standard deviation (right) over 100 timesteps. DEP rapidly learns sensorimotor correlations and produces diverse, coordinated actions}{figure.caption.14}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.5}Pipeline Validation}{5}{subsection.4.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {5}Discussion}{5}{section.5}\protected@file@percent }
+\newlabel{sec:discussion}{{5}{5}{Discussion}{section.5}{}}
+\@writefile{toc}{\contentsline {paragraph}{Why does DEP help?}{5}{section*.16}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Scaling with dimensionality.}{5}{section*.17}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Pipeline integration test results.}}{5}{table.caption.15}\protected@file@percent }
+\newlabel{tab:pipeline}{{3}{5}{Pipeline integration test results}{table.caption.15}{}}
+\@writefile{toc}{\contentsline {paragraph}{Physiological plausibility.}{5}{section*.18}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Limitations.}{5}{section*.19}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {6}Conclusion and Future Work}{5}{section.6}\protected@file@percent }
+\newlabel{sec:conclusion}{{6}{5}{Conclusion and Future Work}{section.6}{}}
+\@writefile{toc}{\contentsline {paragraph}{Future work.}{5}{section*.20}\protected@file@percent }
+\bibcite{deprl2023}{{2}{2023}{{Schumacher et~al.}}{{}}}
+\bibcite{myosuite}{{3}{2022}{{Caggiano et~al.}}{{}}}
+\bibcite{myodex}{{4}{2023}{{Caggiano et~al.}}{{}}}
+\bibcite{peng2018deepmimic}{{5}{2018}{{Peng et~al.}}{{}}}
+\bibcite{peng2021amp}{{6}{2021}{{Peng et~al.}}{{}}}
+\bibcite{der2015novel}{{7}{2015}{{Der and Martius}}{{}}}
+\bibcite{schulman2017ppo}{{8}{2017}{{Schulman et~al.}}{{}}}
+\bibcite{mahmood2018benchmarking}{{9}{2018}{{Mahmood et~al.}}{{}}}
+\bibcite{todorov2012mujoco}{{10}{2012}{{Todorov et~al.}}{{}}}
+\gdef \@abspage@last{6}

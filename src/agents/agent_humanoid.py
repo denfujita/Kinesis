@@ -11,7 +11,6 @@ from abc import ABC, abstractmethod
 import time
 import os
 import torch
-import wandb
 import numpy as np
 import psutil
 
@@ -58,6 +57,8 @@ class AgentHumanoid(AgentPPO, ABC):
         self.setup_policy()
         self.setup_value()
         self.setup_optimizer()
+        self.setup_dep_exploration()
+        self.setup_csv_logger()
         self.seed(cfg.seed)
         self.print_config()
         self.load_checkpoint(checkpoint_epoch)
@@ -154,6 +155,43 @@ class AgentHumanoid(AgentPPO, ABC):
             )
         )
         to_device(self.device, self.value_net)
+
+    def setup_csv_logger(self) -> None:
+        """Set up CSV training logger for recording per-epoch metrics."""
+        from src.utils.csv_logger import CSVTrainingLogger
+        out_dir = self.cfg.get("output_dir", "data/trained_models/default")
+        exp_name = self.cfg.get("exp_name", "kinesis")
+        self.csv_logger = CSVTrainingLogger(out_dir, exp_name)
+
+    def setup_dep_exploration(self) -> None:
+        """
+        Set up DEP exploration if enabled. Requires muscle_len and muscle_force
+        in proprioceptive_inputs (use run=train_run_legs_dep).
+        """
+        self.dep_exploration = None
+        if self.cfg.learning.get("use_dep_exploration", False):
+            dep_cfg = self.cfg.learning
+            from src.exploration.dep_exploration import DEPExploration
+
+            act_high = getattr(
+                self.env.action_space, "high", np.ones(self.action_dim)
+            )
+            if isinstance(act_high, np.ndarray):
+                act_high = act_high.astype(np.float32)
+            self.dep_exploration = DEPExploration(
+                action_dim=self.action_dim,
+                act_high=act_high,
+                dep_params=dict(dep_cfg.get("dep_params", {})),
+                dep_mix=dep_cfg.get("dep_mix", 3),
+                dep_intervention_proba=dep_cfg.get("dep_intervention_proba", 0.1),
+                dep_intervention_length=dep_cfg.get("dep_intervention_length", 4),
+                dep_rl_length=dep_cfg.get("dep_rl_length", 1),
+                dep_alpha=dep_cfg.get("dep_alpha", 0.01),
+            )
+            logger.info(
+                f"DEP exploration enabled: mix={dep_cfg.get('dep_mix')}, "
+                f"proba={dep_cfg.get('dep_intervention_proba')}"
+            )
 
     def setup_optimizer(self) -> None:
         """
@@ -307,19 +345,26 @@ class AgentHumanoid(AgentPPO, ABC):
         logger.info(log_str)
 
         if not self.cfg.no_log:
-            wandb.log(
-                data={
-                    "avg_episode_reward": loggers.avg_episode_reward,
-                    "eps_len": loggers.avg_episode_len,
-                    "avg_rwd": loggers.avg_reward,
-                    "reward_raw": loggers.info_dict,
-                    "cpu_mem": cpu_mem,
-                    "gpu_mem": gpu_mem,
-                    "t_sample": info["T_sample"],
-                    "t_update": info["T_update"],
-                },
-                step=self.epoch,
-            )
+            import wandb
+            wandb_data = {
+                "avg_episode_reward": loggers.avg_episode_reward,
+                "eps_len": loggers.avg_episode_len,
+                "avg_rwd": loggers.avg_reward,
+                "reward_raw": loggers.info_dict,
+                "cpu_mem": cpu_mem,
+                "gpu_mem": gpu_mem,
+                "t_sample": info["T_sample"],
+                "t_update": info["T_update"],
+            }
+            if "mpjpe" in loggers.info_dict and len(loggers.info_dict["mpjpe"]) > 0:
+                wandb_data["eval/mpjpe"] = np.mean(loggers.info_dict["mpjpe"])
+            if "joint_angle_rmse" in loggers.info_dict and len(loggers.info_dict["joint_angle_rmse"]) > 0:
+                wandb_data["eval/joint_angle_rmse"] = np.mean(loggers.info_dict["joint_angle_rmse"])
+            if "activation_volume" in loggers.info_dict and len(loggers.info_dict["activation_volume"]) > 0:
+                wandb_data["eval/activation_volume"] = np.mean(loggers.info_dict["activation_volume"])
+            if "frame_coverage" in loggers.info_dict and len(loggers.info_dict["frame_coverage"]) > 0:
+                wandb_data["eval/frame_coverage"] = np.mean(loggers.info_dict["frame_coverage"])
+            wandb.log(data=wandb_data, step=self.epoch)
 
             if "log_eval" in info:
                 wandb.log(data=info["log_eval"], step=self.epoch)
@@ -366,6 +411,8 @@ class AgentHumanoid(AgentPPO, ABC):
             }
 
             loggers = self.log_train(info)
+            if hasattr(self, "csv_logger"):
+                self.csv_logger.log_epoch(self.epoch, loggers, info)
             eps_len_list.append(loggers.avg_episode_len)
             self.after_epoch()
 
@@ -373,7 +420,7 @@ class AgentHumanoid(AgentPPO, ABC):
 
     def eval_policy(self, epoch: int = 0, dump: bool = False) -> dict:
         """
-        Evaluate the current policy. Placeholder implementation.
+        Evaluate the current policy. Subclasses override with task-specific logic.
 
         Args:
             epoch (int, optional): Current epoch number.

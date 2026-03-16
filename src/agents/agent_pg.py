@@ -154,7 +154,6 @@ class AgentPG(Agent):
         Returns:
             dict: Dictionary containing training metrics and update time.
         """
-        print("Updating parameters...")
         t0 = time.time()
         # Set the modules to training mode
         to_train(*self.update_modules)
